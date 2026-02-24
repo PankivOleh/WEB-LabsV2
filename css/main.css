@@ -263,7 +263,6 @@
   font-size: 0.875rem;
 }
 
-/* === BASE CARD === */
 .card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -315,18 +314,22 @@
   padding: 0 1rem 1rem 1rem;
 }
 
-/* === TREND CARD === */
-.trend-card {
+.trend-card,
+.competitor-card,
+.investor-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.2s;
 }
-.trend-card:hover {
+.trend-card:hover,
+.competitor-card:hover,
+.investor-card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-color: #c4b5fd;
 }
+
 .trend-card__header {
   padding: 1rem;
   display: flex;
@@ -365,18 +368,9 @@
   color: #7c3aed;
 }
 
-/* === COMPETITOR CARD === */
-.competitor-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s;
-}
 .competitor-card:hover {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-  border-color: #c4b5fd;
   transform: translateY(-4px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 .competitor-card__header {
   padding: 1rem;
@@ -410,18 +404,9 @@
   gap: 0.5rem;
 }
 
-/* === INVESTOR CARD === */
-.investor-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s;
-}
 .investor-card:hover {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-  border-color: #c4b5fd;
   transform: translateY(-4px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 .investor-card__header {
   padding: 1rem;
@@ -464,7 +449,6 @@
   margin: 0;
 }
 
-/* === STATS CARD (Investors summary) === */
 .stats-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -581,7 +565,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  justify-content: space-between;
 }
 @media (min-width: 768px) {
   .footer__content {
