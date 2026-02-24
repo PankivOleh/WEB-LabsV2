@@ -1,0 +1,67 @@
+.header {
+    background: $color-white;
+    box-shadow: $shadow-md;
+    border-bottom: 1px solid $color-border;
+
+    &__container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4rem;
+    }
+
+    &__brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    &__title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: $color-text-main;
+        margin: 0;
+    }
+}
+
+.nav {
+    display: flex;
+    gap: 0.25rem;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        color: $color-text-muted;
+        text-decoration: none;
+        transition: $transition-base;
+        font-size: 0.875rem;
+
+        &:hover {
+            background: $color-bg-muted;
+            color: $color-text-main;
+        }
+
+        &--active {
+            background: $color-brand-light;
+            color: $color-brand;
+        }
+    }
+
+    &__icon {
+        stroke-width: 2;
+    }
+
+    &__text {
+        display: none;
+
+        @media (min-width: $bp-sm) {
+            display: inline;
+        }
+    }
+}

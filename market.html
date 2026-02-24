@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Startup Simulator - Ринок</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <div class="header__container">
+        <div class="header__brand">
+          <div class="logo">
+            <svg
+              class="logo__icon"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <use href="./img/icons.svg#icon-rocket"></use>
+            </svg>
+          </div>
+          <h1 class="header__title">Startup Simulator</h1>
+        </div>
+
+        <nav class="nav">
+          <a href="index.html" class="nav__item">
+            <svg
+              class="nav__icon"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+            >
+              <use href="./img/icons.svg#icon-rocket"></use>
+            </svg>
+            <span class="nav__text">Мій стартап</span>
+          </a>
+          <a href="market.html" class="nav__item nav__item--active">
+            <svg
+              class="nav__icon"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+            >
+              <use href="./img/icons.svg#icon-trend-up"></use>
+            </svg>
+            <span class="nav__text">Ринок</span>
+          </a>
+          <a href="investors.html" class="nav__item">
+            <svg
+              class="nav__icon"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+            >
+              <use href="./img/icons.svg#icon-user"></use>
+            </svg>
+            <span class="nav__text">Інвестори</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="main__container">
+        <section class="market">
+          <div class="market__header">
+            <h2 class="market__title">Аналіз ринку</h2>
+            <p class="market__subtitle">
+              Моніторинг конкурентів та ринкових трендів
+            </p>
+          </div>
+
+          <div class="trends">
+            <div class="trends__header">
+              <svg
+                class="trends__icon"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+              >
+                <use href="./img/icons.svg#icon-trend-up"></use>
+              </svg>
+              <h3 class="trends__title">Ринкові тренди</h3>
+            </div>
+
+            <div class="trends__grid">
+              <div class="trend-card">
+                <div class="trend-card__header">
+                  <h4 class="trend-card__title">AI та машинне навчання</h4>
+                  <span class="badge badge--high">Високий</span>
+                </div>
+                <div class="trend-card__content">
+                  <p class="trend-card__description">
+                    Зростання попиту на AI-рішення у бізнесі
+                  </p>
+                  <div class="trend-card__growth">
+                    <svg
+                      class="trend-card__icon"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <use href="./img/icons.svg#icon-bar-chart"></use>
+                    </svg>
+                    <span class="trend-card__percentage">Зростання: +156%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="trend-card">
+                <div class="trend-card__header">
+                  <h4 class="trend-card__title">Зелені технології</h4>
+                  <span class="badge badge--medium">Середній</span>
+                </div>
+                <div class="trend-card__content">
+                  <p class="trend-card__description">
+                    Екологічні стартапи отримують більше інвестицій
+                  </p>
+                  <div class="trend-card__growth">
+                    <svg
+                      class="trend-card__icon"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <use href="./img/icons.svg#icon-bar-chart"></use>
+                    </svg>
+                    <span class="trend-card__percentage">Зростання: +89%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="trend-card">
+                <div class="trend-card__header">
+                  <h4 class="trend-card__title">Цифрова медицина</h4>
+                  <span class="badge badge--high">Високий</span>
+                </div>
+                <div class="trend-card__content">
+                  <p class="trend-card__description">
+                    Телемедицина та онлайн-консультації
+                  </p>
+                  <div class="trend-card__growth">
+                    <svg
+                      class="trend-card__icon"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <use href="./img/icons.svg#icon-bar-chart"></use>
+                    </svg>
+                    <span class="trend-card__percentage">Зростання: +124%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="trend-card">
+                <div class="trend-card__header">
+                  <h4 class="trend-card__title">Фінансова інклюзія</h4>
+                  <span class="badge badge--medium">Середній</span>
+                </div>
+                <div class="trend-card__content">
+                  <p class="trend-card__description">
+                    Фінтех для малого бізнесу
+                  </p>
+                  <div class="trend-card__growth">
+                    <svg
+                      class="trend-card__icon"
+                      width="16"
+                      height="16"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <use href="./img/icons.svg#icon-bar-chart"></use>
+                    </svg>
+                    <span class="trend-card__percentage">Зростання: +67%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="competitors">
+            <div class="competitors__header">
+              <svg
+                class="competitors__icon"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+              >
+                <use href="./img/icons.svg#icon-building"></use>
+              </svg>
+              <h3 class="competitors__title">Конкуренти</h3>
+            </div>
+
+            <div class="competitors__grid">
+              <div class="competitor-card">
+                <div class="competitor-card__header">
+                  <div class="competitor-card__info">
+                    <h4 class="competitor-card__name">InnovateTech</h4>
+                    <span class="badge badge--large">Велика</span>
+                  </div>
+                  <p class="competitor-card__industry">Технології</p>
+                </div>
+                <div class="competitor-card__content">
+                  <div class="competitor-card__stats">
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-user"></use>
+                        </svg>
+                        <span>Працівники</span>
+                      </div>
+                      <span class="stat__value">150</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-dollar"></use>
+                        </svg>
+                        <span>Дохід</span>
+                      </div>
+                      <span class="stat__value">$2400K</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-trend-up"></use>
+                        </svg>
+                        <span>Зростання</span>
+                      </div>
+                      <span class="stat__value stat__value--success">+28%</span>
+                    </div>
+                  </div>
+                  <div class="competitor-card__markets">
+                    <div class="markets-label">
+                      <svg
+                        class="markets-label__icon"
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <use href="./img/icons.svg#icon-pin"></use>
+                      </svg>
+                      <span>Ринки збуту</span>
+                    </div>
+                    <div class="markets-list">
+                      <span class="market-tag">Україна</span>
+                      <span class="market-tag">Польща</span>
+                      <span class="market-tag">Німеччина</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="competitor-card">
+                <div class="competitor-card__header">
+                  <div class="competitor-card__info">
+                    <h4 class="competitor-card__name">FinanceFlow</h4>
+                    <span class="badge badge--medium">Середня</span>
+                  </div>
+                  <p class="competitor-card__industry">Фінтех</p>
+                </div>
+                <div class="competitor-card__content">
+                  <div class="competitor-card__stats">
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-user"></use>
+                        </svg>
+                        <span>Працівники</span>
+                      </div>
+                      <span class="stat__value">80</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-dollar"></use>
+                        </svg>
+                        <span>Дохід</span>
+                      </div>
+                      <span class="stat__value">$1200K</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-trend-up"></use>
+                        </svg>
+                        <span>Зростання</span>
+                      </div>
+                      <span class="stat__value stat__value--success">+15%</span>
+                    </div>
+                  </div>
+                  <div class="competitor-card__markets">
+                    <div class="markets-label">
+                      <svg
+                        class="markets-label__icon"
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <use href="./img/icons.svg#icon-pin"></use>
+                      </svg>
+                      <span>Ринки збуту</span>
+                    </div>
+                    <div class="markets-list">
+                      <span class="market-tag">Україна</span>
+                      <span class="market-tag">Чехія</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="competitor-card">
+                <div class="competitor-card__header">
+                  <div class="competitor-card__info">
+                    <h4 class="competitor-card__name">EduPro</h4>
+                    <span class="badge badge--small">Мала</span>
+                  </div>
+                  <p class="competitor-card__industry">Освіта</p>
+                </div>
+                <div class="competitor-card__content">
+                  <div class="competitor-card__stats">
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-user"></use>
+                        </svg>
+                        <span>Працівники</span>
+                      </div>
+                      <span class="stat__value">35</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-dollar"></use>
+                        </svg>
+                        <span>Дохід</span>
+                      </div>
+                      <span class="stat__value">$450K</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-trend-up"></use>
+                        </svg>
+                        <span>Зростання</span>
+                      </div>
+                      <span class="stat__value stat__value--success">+42%</span>
+                    </div>
+                  </div>
+                  <div class="competitor-card__markets">
+                    <div class="markets-label">
+                      <svg
+                        class="markets-label__icon"
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <use href="./img/icons.svg#icon-pin"></use>
+                      </svg>
+                      <span>Ринки збуту</span>
+                    </div>
+                    <div class="markets-list">
+                      <span class="market-tag">Україна</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="competitor-card">
+                <div class="competitor-card__header">
+                  <div class="competitor-card__info">
+                    <h4 class="competitor-card__name">HealthHub</h4>
+                    <span class="badge badge--medium">Середня</span>
+                  </div>
+                  <p class="competitor-card__industry">Здоров'я</p>
+                </div>
+                <div class="competitor-card__content">
+                  <div class="competitor-card__stats">
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-user"></use>
+                        </svg>
+                        <span>Працівники</span>
+                      </div>
+                      <span class="stat__value">65</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-dollar"></use>
+                        </svg>
+                        <span>Дохід</span>
+                      </div>
+                      <span class="stat__value">$980K</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-trend-up"></use>
+                        </svg>
+                        <span>Зростання</span>
+                      </div>
+                      <span class="stat__value stat__value--success">+19%</span>
+                    </div>
+                  </div>
+                  <div class="competitor-card__markets">
+                    <div class="markets-label">
+                      <svg
+                        class="markets-label__icon"
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <use href="./img/icons.svg#icon-pin"></use>
+                      </svg>
+                      <span>Ринки збуту</span>
+                    </div>
+                    <div class="markets-list">
+                      <span class="market-tag">Україна</span>
+                      <span class="market-tag">Румунія</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="competitor-card">
+                <div class="competitor-card__header">
+                  <div class="competitor-card__info">
+                    <h4 class="competitor-card__name">MarketMaster</h4>
+                    <span class="badge badge--small">Мала</span>
+                  </div>
+                  <p class="competitor-card__industry">Маркетинг</p>
+                </div>
+                <div class="competitor-card__content">
+                  <div class="competitor-card__stats">
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-user"></use>
+                        </svg>
+                        <span>Працівники</span>
+                      </div>
+                      <span class="stat__value">28</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-dollar"></use>
+                        </svg>
+                        <span>Дохід</span>
+                      </div>
+                      <span class="stat__value">$380K</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-trend-up"></use>
+                        </svg>
+                        <span>Зростання</span>
+                      </div>
+                      <span class="stat__value stat__value--success">+31%</span>
+                    </div>
+                  </div>
+                  <div class="competitor-card__markets">
+                    <div class="markets-label">
+                      <svg
+                        class="markets-label__icon"
+                        width="12"
+                        height="12"
+                        fill="none"
+                        stroke="currentColor"
+                      >
+                        <use href="./img/icons.svg#icon-pin"></use>
+                      </svg>
+                      <span>Ринки збуту</span>
+                    </div>
+                    <div class="markets-list">
+                      <span class="market-tag">Україна</span>
+                      <span class="market-tag">Польща</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="competitor-card">
+                <div class="competitor-card__header">
+                  <div class="competitor-card__info">
+                    <h4 class="competitor-card__name">ShopSmart</h4>
+                    <span class="badge badge--large">Велика</span>
+                  </div>
+                  <p class="competitor-card__industry">E-commerce</p>
+                </div>
+                <div class="competitor-card__content">
+                  <div class="competitor-card__stats">
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        >
+                          <use href="./img/icons.svg#icon-user"></use>
+                        </svg>
+                        <span>Працівники</span>
+                      </div>
+                      <span class="stat__value">200</span>
+                    </div>
+                    <div class="stat">
+                      <div class="stat__label">
+                        <svg
+                          class="stat__icon"
+                          width="16"
+                          height="16"
+                          fill="none"
+                          stroke="currentColor"
+                        ></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

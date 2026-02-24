@@ -1,0 +1,51 @@
+// === COLORS ===
+$color-white: #ffffff;
+$color-bg-light: #f8fafc;
+$color-bg-muted: #f1f5f9;
+
+$color-text-main: #0f172a;
+$color-text-muted: #64748b;
+
+$color-brand: #7c3aed;
+$color-brand-hover: #6d28d9;
+$color-brand-light: #ede9fe;
+$color-brand-lightest: #f5f3ff;
+
+$color-success: #10b981;
+$color-warning: #f97316;
+
+$color-border: #e2e8f0;
+$color-border-hover: #c4b5fd;
+$color-border-dashed: #cbd5e1;
+
+// Badge Colors (Background / Text)
+$color-badge-green-bg: #d1fae5;
+$color-badge-green-txt: #065f46;
+$color-badge-yellow-bg: #fef3c7;
+$color-badge-yellow-txt: #92400e;
+$color-badge-purple-bg: #e9d5ff;
+$color-badge-purple-txt: #6b21a8;
+$color-badge-blue-bg: #dbeafe;
+$color-badge-blue-txt: #1e40af;
+
+// === GRADIENTS ===
+$grad-page: linear-gradient(to bottom right, $color-bg-light, $color-bg-muted);
+$grad-logo: linear-gradient(to bottom right, #8b5cf6, #9333ea);
+$grad-chart: linear-gradient(to bottom, $color-bg-light, $color-bg-muted);
+$grad-card-violet: linear-gradient(to bottom right, $color-brand-lightest, #faf5ff);
+$grad-card-blue: linear-gradient(to bottom right, #eff6ff, $color-badge-blue-bg);
+$grad-card-green: linear-gradient(to bottom right, #f0fdf4, #dcfce7);
+
+// === SHADOWS ===
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+// === BREAKPOINTS ===
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+
+// === TRANSITIONS ===
+$transition-base: all 0.2s;

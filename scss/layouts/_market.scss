@@ -1,0 +1,22 @@
+.market {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__title {
+        font-size: 1.875rem;
+        font-weight: 600;
+        color: $color-text-main;
+    }
+
+    &__subtitle {
+        color: $color-text-muted;
+    }
+}
+
+.competitors-table {
+    display: grid;
+    grid-template-columns: 1.5fr 1.2fr 1fr 1.2fr 1fr;
+    border: 1px solid $color-text-main;
+    // Додай сюди стилі з попередніх повідомлень для сітки
+}

@@ -1,0 +1,14 @@
+.logo {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: $gradient-logo;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        color: #ffffff;
+        stroke-width: 2;
+    }
+}
