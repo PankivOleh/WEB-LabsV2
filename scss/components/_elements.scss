@@ -181,6 +181,7 @@
 .chart {
     height: 300px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -198,4 +199,79 @@
         color: $color-text-muted;
         font-size: 0.875rem;
     }
+    &__img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
+
+.currency-button {
+        padding: 0.4rem 1rem;
+        border: 1px solid $color-border;
+        background: transparent;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $color-text-muted;
+        cursor: pointer;
+        transition: $transition-base;
+
+        &:hover {
+            background: $color-bg-muted;
+            color: $color-text-main;
+        }
+
+        &--active {
+            background: $color-brand;
+            color: $color-white;
+            border-color: $color-brand;
+
+            &:hover {
+                background: $color-brand-hover;
+                color: $color-white;
+            }
+        }
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    &__label{
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    &__input{
+        padding: 0.5rem;
+        border: 1px solid $color-border;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        color: $color-text-main;
+        transition: $transition-base;
+        background-color: $color-bg-muted;
+
+        &:focus {
+            outline: none;
+            border-color: $color-brand;
+            box-shadow: 0 0 0 2px rgba($color-brand, 0.2);
+        }
+    }
+    &__select__wrapper{
+        width: 100%;
+    }
+    &__select{
+        padding: 0.5rem;
+            border: 1px solid $color-border;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: $color-text-main;
+            transition: $transition-base;
+            background-color: $color-bg-muted;
+            width: 100%;
+            }
+        
+            &:focus {
+                outline: none;
+                border-color: $color-brand;
+                box-shadow: 0 0 0 2px rgba($color-brand, 0.2);
+            }
+    }
