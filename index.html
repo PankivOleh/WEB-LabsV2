@@ -218,21 +218,30 @@
                 </div>
               </div>
             </div>
-
-            <div class="card card--chart">
+            <div class="card">
               <div class="card__header">
-                <h3 class="card__title card__title--large">Зростання доходу</h3>
+                <h3 class="card__title">Динаміка чистого прибутку</h3>
               </div>
               <div class="card__content">
-                <div class="chart">
-                  <div class="chart__placeholder">
-                    <img
-                      class="chart__img"
-                      src="./img/Знімок екрана 2026-02-25 101936.png"
-                      alt="Графік зростання"
-                    />
-                  </div>
-                </div>
+                <table
+                  class="market-table"
+                  style="
+                    width: 100%;
+                    text-align: left;
+                    border-collapse: collapse;
+                  "
+                >
+                  <thead>
+                    <tr style="border-bottom: 2px solid #eee">
+                      <th style="padding: 10px 0">Місяць</th>
+                      <th>Доходи</th>
+                      <th>Витрати</th>
+                      <th>Чистий прибуток</th>
+                      <th>Динаміка</th>
+                    </tr>
+                  </thead>
+                  <tbody id="profit-table-body"></tbody>
+                </table>
                 <div class="charts__setting--currency">
                   <button type="button" class="currency-button">
                     <svg
