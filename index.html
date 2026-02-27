@@ -227,23 +227,26 @@
                   class="market-table"
                   style="
                     width: 100%;
-                    text-align: left;
+                    text-align: center;
                     border-collapse: collapse;
                   "
                 >
                   <thead>
                     <tr style="border-bottom: 2px solid #eee">
-                      <th style="padding: 10px 0">Місяць</th>
-                      <th>Доходи</th>
-                      <th>Витрати</th>
-                      <th>Чистий прибуток</th>
-                      <th>Динаміка</th>
+                      <th style="text-align: center">Місяць</th>
+                      <th style="text-align: center">Доходи</th>
+                      <th style="text-align: center">Витрати</th>
+                      <th style="text-align: center">Чистий прибуток</th>
                     </tr>
                   </thead>
                   <tbody id="profit-table-body"></tbody>
                 </table>
                 <div class="charts__setting--currency">
-                  <button type="button" class="currency-button">
+                  <button
+                    type="button"
+                    class="currency-button"
+                    id="hryvnia-button"
+                  >
                     <svg
                       width="14"
                       height="14"
@@ -253,7 +256,11 @@
                       <use href="./img/icons.svg#icon-hryvnia"></use>
                     </svg>
                   </button>
-                  <button type="button" class="currency-button">
+                  <button
+                    type="button"
+                    class="currency-button"
+                    id="dollar-button"
+                  >
                     <svg
                       width="14"
                       height="14"
@@ -263,7 +270,11 @@
                       <use href="./img/icons.svg#icon-dollar-sign"></use>
                     </svg>
                   </button>
-                  <button type="button" class="currency-button">
+                  <button
+                    type="button"
+                    class="currency-button"
+                    id="euro-button"
+                  >
                     <svg
                       width="14"
                       height="14"
@@ -506,5 +517,6 @@
     <script src="./js/startup-data-calculator.js"></script>
     <script src="./js/startup-history.js"></script>
     <script src="./js/startup-charts.js"></script>
+    <script src="./js/show-tablet.js"></script>
   </body>
 </html>
