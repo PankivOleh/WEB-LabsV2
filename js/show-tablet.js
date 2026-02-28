@@ -63,27 +63,21 @@ const createHistoryData = (history, currency) => {
   return historyData;
 };
 
-const euroBtn = document
-  .getElementById("euro-button")
-  .addEventListener("click", () => {
-    currency = liveRates.EUR;
-    currencyIcon = "€";
-    applyTbletData(createHistoryData(history, currency), currencyIcon);
-  });
-const hryvniaBtn = document
-  .getElementById("hryvnia-button")
-  .addEventListener("click", () => {
-    currency = liveRates.UAH;
-    currencyIcon = "₴";
-    applyTbletData(createHistoryData(history, currency), currencyIcon);
-  });
-const dollarBtn = document
-  .getElementById("dollar-button")
-  .addEventListener("click", () => {
-    currency = liveRates.USD;
-    currencyIcon = "$";
-    applyTbletData(createHistoryData(history, currency), currencyIcon);
-  });
+document.getElementById("euro-button").addEventListener("click", () => {
+  currency = liveRates.EUR;
+  currencyIcon = "€";
+  applyTbletData(createHistoryData(history, currency), currencyIcon);
+});
+document.getElementById("hryvnia-button").addEventListener("click", () => {
+  currency = liveRates.UAH;
+  currencyIcon = "₴";
+  applyTbletData(createHistoryData(history, currency), currencyIcon);
+});
+document.getElementById("dollar-button").addEventListener("click", () => {
+  currency = liveRates.USD;
+  currencyIcon = "$";
+  applyTbletData(createHistoryData(history, currency), currencyIcon);
+});
 
 fetchCurrencyRates();
 applyTbletData(createHistoryData(history, currency), currencyIcon);
