@@ -1,4 +1,4 @@
-const history = JSON.parse(localStorage.getItem("history"));
+let history_tablet = JSON.parse(localStorage.getItem("history"));
 const tablet = document.getElementById("profit-table-body");
 let liveRates = {
   UAH: 41,
@@ -66,18 +66,18 @@ const createHistoryData = (history, currency) => {
 document.getElementById("euro-button").addEventListener("click", () => {
   currency = liveRates.EUR;
   currencyIcon = "€";
-  applyTbletData(createHistoryData(history, currency), currencyIcon);
+  applyTbletData(createHistoryData(history_tablet, currency), currencyIcon);
 });
 document.getElementById("hryvnia-button").addEventListener("click", () => {
   currency = liveRates.UAH;
   currencyIcon = "₴";
-  applyTbletData(createHistoryData(history, currency), currencyIcon);
+  applyTbletData(createHistoryData(history_tablet, currency), currencyIcon);
 });
 document.getElementById("dollar-button").addEventListener("click", () => {
   currency = liveRates.USD;
   currencyIcon = "$";
-  applyTbletData(createHistoryData(history, currency), currencyIcon);
+  applyTbletData(createHistoryData(history_tablet, currency), currencyIcon);
 });
 
 fetchCurrencyRates();
-applyTbletData(createHistoryData(history, currency), currencyIcon);
+applyTbletData(createHistoryData(history_tablet, currency), currencyIcon);
