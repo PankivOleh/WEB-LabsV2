@@ -18,7 +18,7 @@ const renderInvestors = (investors) => {
                       fill="none"
                       stroke="currentColor"
                     >
-                      <use href="./img/icons.svg#icon-building"></use>
+                      <use href="./public/img/icons.svg#icon-building"></use>
                     </svg>
                   </div>
                   <h4 class="investor-card__name">${investor.name}</h4>
@@ -36,7 +36,7 @@ const renderInvestors = (investors) => {
                         fill="none"
                         stroke="currentColor"
                       >
-                        <use href="./img/icons.svg#icon-dollar"></use>
+                        <use href="./public/img/icons.svg#icon-dollar"></use>
                       </svg>
                       <span>Портфель</span>
                     </div>
@@ -51,7 +51,7 @@ const renderInvestors = (investors) => {
                         fill="none"
                         stroke="currentColor"
                       >
-                        <use href="./img/icons.svg#icon-trend-up"></use>
+                        <use href="./public/img/icons.svg#icon-trend-up"></use>
                       </svg>
                       <span>Інвестицій</span>
                     </div>
@@ -66,7 +66,7 @@ const renderInvestors = (investors) => {
                         fill="none"
                         stroke="currentColor"
                       >
-                        <use href="./img/icons.svg#icon-briefcase"></use>
+                        <use href="./public/img/icons.svg#icon-briefcase"></use>
                       </svg>
                       <span>Середній чек</span>
                     </div>
@@ -82,7 +82,7 @@ const renderInvestors = (investors) => {
                       fill="none"
                       stroke="currentColor"
                     >
-                      <use href="./img/icons.svg#icon-user"></use>
+                      <use href="./public/img/icons.svg#icon-user"></use>
                     </svg>
                     <span>Сфера інтересів</span>
                   </div>
@@ -102,7 +102,7 @@ const renderInvestors = (investors) => {
                       fill="none"
                       stroke="currentColor"
                     >
-                      <use href="./img/icons.svg#icon-social-2"></use>
+                      <use href="./public/img/icons.svg#icon-social-2"></use>
                     </svg>
                     Зв'язатися
                   </button>
@@ -139,7 +139,7 @@ const renderCompetitors = (competitors) => {
                           fill="none"
                           stroke="currentColor"
                         >
-                          <use href="./img/icons.svg#icon-user"></use>
+                          <use href="./public/img/icons.svg#icon-user"></use>
                         </svg>
                         <span>Працівники</span>
                       </div>
@@ -154,7 +154,7 @@ const renderCompetitors = (competitors) => {
                           fill="none"
                           stroke="currentColor"
                         >
-                          <use href="./img/icons.svg#icon-dollar"></use>
+                          <use href="./public/img/icons.svg#icon-dollar"></use>
                         </svg>
                         <span>Дохід</span>
                       </div>
@@ -169,7 +169,7 @@ const renderCompetitors = (competitors) => {
                           fill="none"
                           stroke="currentColor"
                         >
-                          <use href="./img/icons.svg#icon-trend-up"></use>
+                          <use href="./public/img/icons.svg#icon-trend-up"></use>
                         </svg>
                         <span>Зростання</span>
                       </div>
@@ -185,7 +185,7 @@ const renderCompetitors = (competitors) => {
                         fill="none"
                         stroke="currentColor"
                       >
-                        <use href="./img/icons.svg#icon-pin"></use>
+                        <use href="./public/img/icons.svg#icon-pin"></use>
                       </svg>
                       <span>Ринки збуту</span>
                     </div>
