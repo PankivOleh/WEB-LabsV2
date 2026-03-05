@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// Видаляємо BrowserRouter з імпорту, залишаємо тільки Routes та Route
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Home from "./pages/home";
+import Investors from "./pages/investors";
+import Market from "./pages/market";
+import Header from "./components/header";
+import Footer from "./components/footer";
+import "./css/main.css";
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+function App() { 
+    return (
+        <div className="page">
+        <>
+            <Header />
+            
+            {}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/investors" element={<Investors />} />
+                <Route path="/market" element={<Market />} />
+            </Routes>
+            
+            <Footer />
+            </>
+        </div>
+    );
 }
 
-export default App
+export default App;

@@ -1,5 +1,5 @@
-const confirmButton = document.querySelector(".modal-setting__button");
-DataconfirmButton = confirmButton.addEventListener("click", () => {
+const confirmButton = document.querySelector(".modal-setting__button")
+.addEventListener("click", () => {
   let input = document.getElementById("company-name");
   const companyName = input.value;
   input = document.getElementById("company-industry");

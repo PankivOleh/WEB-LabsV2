@@ -1,4 +1,4 @@
-const CURRENT_INVESTORS_VERSION = "1.0.0";
+const CURRENT_INVESTORS_VERSION = "1.0.1";
 
 const initializeInvestors = () => {
   if (
@@ -94,17 +94,7 @@ const initializeInvestors = () => {
         stage: "Pre-seed",
         contacts: "contact@smartmoneyangels.com",
       },
-      {
-        id: 10,
-        name: "Consumer Tech Fund",
-        type: "Венчурний фонд",
-        portfolio: "$30M",
-        investments: "47",
-        avgCheck: "$600K",
-        focus: ["E-commerce", "Consumer Tech"],
-        stage: "Seed, Series A",
-        contacts: "contact@consumer-tech.com",
-      },
+  
     ];
     localStorage.setItem("investors", JSON.stringify(investorsList));
     localStorage.setItem("investors_version", CURRENT_INVESTORS_VERSION);
@@ -125,8 +115,8 @@ const initializeCompetitor = () => {
         size: "Велика",
         industry: "Технології",
         employees: "150",
-        revenue: "$2400K",
-        growth: "+28%",
+        revenue: "2400",
+        growth: "28",
         markets: ["Україна", "Польща", "Німеччина"],
       },
       {
@@ -135,8 +125,8 @@ const initializeCompetitor = () => {
         size: "Середня",
         industry: "Фінтех",
         employees: "80",
-        revenue: "$1200K",
-        growth: "+15%",
+        revenue: "1200",
+        growth: "15",
         markets: ["Україна", "Чехія"],
       },
       {
@@ -145,8 +135,8 @@ const initializeCompetitor = () => {
         size: "Мала",
         industry: "Освіта",
         employees: "35",
-        revenue: "$450K",
-        growth: "+42%",
+        revenue: "450",
+        growth: "42",
         markets: ["Україна"],
       },
       {
@@ -155,8 +145,8 @@ const initializeCompetitor = () => {
         size: "Середня",
         industry: "Здоров'я",
         employees: "65",
-        revenue: "$980K",
-        growth: "+19%",
+        revenue: "980",
+        growth: "19",
         markets: ["Україна", "Румунія"],
       },
       {
@@ -165,8 +155,8 @@ const initializeCompetitor = () => {
         size: "Мала",
         industry: "Маркетинг",
         employees: "28",
-        revenue: "$380K",
-        growth: "+31%",
+        revenue: "380",
+        growth: "31",
         markets: ["Україна", "Польща"],
       },
       {
@@ -175,8 +165,8 @@ const initializeCompetitor = () => {
         size: "Велика",
         industry: "E-commerce",
         employees: "200",
-        revenue: "$3500K",
-        growth: "+22%",
+        revenue: "3500",
+        growth: "22",
         markets: ["Україна", "Польща", "Литва", "Естонія"],
       },
     ];
