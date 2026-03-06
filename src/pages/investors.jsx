@@ -2,6 +2,7 @@ import ShowInvestors from "../components/investors-show";
 
 const Investors = () => {
     return (
+         <main className="main">
          <div className="main__container">
         <section className="investors">
           <div className="investors__header">
@@ -51,6 +52,7 @@ const Investors = () => {
           </div>
         </section>
     </div>
+    </main>
     );
 }
  export default Investors;

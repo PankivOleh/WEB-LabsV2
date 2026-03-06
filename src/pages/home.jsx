@@ -1,48 +1,265 @@
 import ShowChart from "../components/show-chart";
+import ModalSettings from "../components/modal-setting";
+import { useEffect, useState } from "react";
+
+const calculateStats = (data) => {
+  const marketRegions = [
+    { name: "North America", multiplier: 1.7, aliases: ["north america", "america", "usa", "сша", "америка", "canada", "канада", "united states"] },
+    { name: "Western/Northern Europe", multiplier: 1.5, aliases: ["europe", "європа", "uk", "britain", "великобританія", "germany", "німеччина", "france", "франція", "sweden", "швеція"] },
+    { name: "Eastern Europe", multiplier: 0.8, aliases: ["eastern europe", "східна європа", "ukraine", "україна", "poland", "польща", "romania", "румунія", "czech"] },
+    { name: "Asia", multiplier: 1.1, aliases: ["asia", "азія", "china", "китай", "japan", "японія", "india", "індія", "korea", "корея"] },
+  ];
+  
+  const industryStats = {
+    ecommerce: { baseRevenuePerEmp: 3300, avgSalary: 3000, officeCost: 9000 },
+    tech: { baseRevenuePerEmp: 4200, avgSalary: 3500, officeCost: 10000 },
+    fintech: { baseRevenuePerEmp: 5000, avgSalary: 4500, officeCost: 12000 },
+    health: { baseRevenuePerEmp: 4000, avgSalary: 3200, officeCost: 20000 },
+  };
+
+  const getRegionMultiplier = (region) => {
+    let multiplier = 1;
+    const cleanInput = region.trim().toLowerCase();
+    const foundRegion = marketRegions.find((r) => r.aliases.includes(cleanInput));
+    return foundRegion ? foundRegion.multiplier : multiplier;
+  };
+
+  const calculateGeneralMultiplier = (regionsString) => {
+    const regionsArray = typeof regionsString === 'string' ? regionsString.split(',') : [];
+    if (regionsArray.length === 0) return 1;
+
+    let multipliers = [];
+    for (let region of regionsArray) {
+      multipliers.push(getRegionMultiplier(region));
+    }
+    return multipliers.reduce((avg, current) => avg + current, 0) / multipliers.length;
+  };
+
+  const calculateEmployeeRevenue = (employeeCount, industryData) => {
+    return employeeCount * industryData.baseRevenuePerEmp;
+  };
+
+  const calculateRevenue = (employees, industry, regions) => {
+    const multiplier = calculateGeneralMultiplier(regions);
+    const industryData = industryStats[industry.toLowerCase()] || industryStats.tech;
+    return calculateEmployeeRevenue(employees, industryData) * multiplier;
+  };
+
+  const calculateExpenses = (employees, industry, offices) => {
+    const industryData = industryStats[industry.toLowerCase()] || industryStats.tech;
+    let expenses = employees * industryData.avgSalary;
+    const officeCount = typeof offices === 'string' ? offices.split(',').length : 1;
+    expenses += officeCount * industryData.officeCost;
+    return expenses;
+  };
+
+  const income = calculateRevenue(data.employee, data.industry, data.region);
+  const expenses = calculateExpenses(data.employee, data.industry, data.offices);
+  const profit = income - expenses;
+  const margin = income > 0 ? ((profit / income) * 100).toFixed(1) : 0;
+
+  return {
+    income: Math.round(income),
+    expenses: Math.round(expenses),
+    profit: Math.round(profit),
+    margin: margin
+  };
+}
+
+
+
+const cleanNum = (value) => {
+  if (typeof value === "number") return value;
+  if (!value) return 0;
+
+  return Number(value.replace(/[^0-9.-]+/g, "")) || 0;
+};
+const createHistory = (data, month) => {
+  let history = [
+    {
+      date: new Date(),
+      employees: cleanNum(data.employees),
+      income: cleanNum(data.income),
+      expenses: cleanNum(data.expenses),
+    },
+  ];
+  let historyDate;
+  let tempCount = cleanNum(data.employees);
+  let tempIncome = cleanNum(data.income);
+  let tempExpenses = cleanNum(data.expenses);
+  for (let i = 0; i < month; i++) {
+    historyDate = new Date();
+    historyDate.setDate(1);
+    historyDate.setMonth(historyDate.getMonth() - i);
+
+    let hiredThatMonth = Math.floor(Math.random() * 4);
+    tempCount = tempCount - hiredThatMonth;
+    if (tempCount < 1) {
+      tempCount = 1;
+    }
+
+    const randomGrowthRate = Math.random() * 0.08 + 0.02;
+    tempIncome = tempIncome / (1 + randomGrowthRate);
+
+    const randomExpensesRate = Math.random() * 0.08 + 0.02;
+    tempExpenses = tempExpenses / (1 + randomExpensesRate);
+
+    let tempData = {
+      date: historyDate,
+      employees: tempCount,
+      income: Math.round(tempIncome),
+      expenses: Math.round(tempExpenses),
+    };
+    history.unshift(tempData);
+  }
+  return history;
+};
+
+const percentChange = (current, previous) => {
+  if (previous === 0) {
+    return "N/A";
+  }
+  let procent = ((current - previous) / previous) * 100;
+  if (procent > 0) {
+    return  + procent.toFixed(1) ;
+  }
+  return procent.toFixed(1) ;
+};
+const intChange = (current, previous) => {
+  if (current > previous) {
+    return + (current - previous);
+  } else if (current < previous) {
+    return previous - current;
+  } else {
+    return "0";
+  }
+};
+
+
+const applyHistory = (history) => {
+  const current = history[history.length - 1];
+  const previous = history[history.length - 2];
+  
+  const employeeIncrease = intChange(
+    current.employees,
+    previous.employees,
+  );
+  const incomeIncrease = percentChange(
+    current.income,
+    previous.income,
+  );
+  const expenseIncrease= percentChange(
+    current.expenses,
+    previous.expenses,
+  );
+  const increaseData = {
+    employeeIncrease: employeeIncrease,
+    incomeIncrease: incomeIncrease,
+    expenseIncrease: expenseIncrease
+  };
+  return increaseData;
+};
+
+function initStartupHistory(employees , income , expenses) {
+  const curentData = {
+    employees: employees,
+    income: income,
+    expenses: expenses
+  };
+  
+  if (!curentData.employees || !curentData.income || !curentData.expenses) {
+    console.warn("DOM elements for startup data not found yet");
+    return;
+  }
+
+  let month = 12;
+
+    const simulatedHistory = createHistory(curentData, month);
+  return simulatedHistory;
+
+}
+
+
+
 
 const Home = () => { 
-    return (
+
+  const [companyData, submitData] = useState(() => {
+    const saved = JSON.parse(localStorage.getItem("financialData"));
+    if (saved) {
+      return saved;
+    } else {
+      return {
+        name: "TechStart",
+        industry: "tech",
+        employee: 25,
+        region: "Україна, Польща",
+        offices: "Київ, Варшава"
+      }
+    }
+  })
+
+  const stats = calculateStats(companyData);
+
+  const handleSavedData = (newData) => {
+    submitData(newData);
+    localStorage.setItem("financialData", JSON.stringify(newData));
+  }
+
+  const displayIndustry = {
+    tech: "Технології",
+    fintech: "Фінтех",
+    ecommerce: "E-commerce",
+    health: "Здоров'я"
+  }[companyData.industry] || companyData.industry;
+
+  const [increaseData, setIncreaseData] = useState({
+    employeeIncrease: "+0",
+    incomeIncrease: "+0%",
+    expenseIncrease: "+0%"
+  });
+
+  useEffect(() => {
+    const newHistory = initStartupHistory(companyData.employee, stats.income, stats.expenses);
+    localStorage.setItem("history", JSON.stringify(newHistory));
+    const increaseData = applyHistory(newHistory);
+    setIncreaseData(increaseData);
+  }, [companyData, stats.income, stats.expenses]);
+
+
+
+
+  return (
+    <main className="main">
     <div className="main__container">
         <section className="startup">
           <div className="startup__header">
             <div className="startup__info">
-              <h2 className="startup__name" id="name">TechStart</h2>
-              <p className="startup__industry" id="industry">Технології</p>
+                <h2 className="startup__name" id="name">{companyData.name}</h2>
+                <p className="startup__industry" id="industry">{companyData.industry}</p>
             </div>
-            <button className="modal-button button button--primary">
-              <svg
-                className="button__icon"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-              >
-                <use href="./public/img/icons.svg#icon-edit"></use>
-              </svg>
-              Редагувати
-            </button>
+          
+            <ModalSettings 
+                companyData={companyData} 
+                onSave={handleSavedData} 
+            />
+
           </div>
           <div className="metrics">
             <div className="card card--highlight">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg
-                    className="card__icon card__icon--violet"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <use href="./public/img/icons.svg#icon-users"></use>
+                  <svg className="card__icon card__icon--violet" width="16" height="16" fill="none" stroke="currentColor">
+                    <use href="/img/icons.svg#icon-users"></use>
                   </svg>
                   Працівники
                 </h3>
               </div>
               <div className="card__content">
                 <div className="metric">
-                  <div className="metric__value" id="employee-value">25</div>
+                    <div className="metric__value" id="employee-value">{companyData.employee}</div>
                   <p className="metric__label metric__label--success">
-                    <span id="employee-increase"> +3</span> цього місяця
+                    <span id="employee-increase"> { increaseData.employeeIncrease}</span> цього місяця
                   </p>
                 </div>
               </div>
@@ -51,23 +268,18 @@ const Home = () => {
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg
-                    className="card__icon card__icon--green"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <use href="./public/img/icons.svg#icon-dollar"></use>
+                  <svg className="card__icon card__icon--green" width="16" height="16" fill="none" stroke="currentColor">
+                    <use href="/img/icons.svg#icon-dollar"></use>
                   </svg>
                   Дохід
                 </h3>
               </div>
               <div className="card__content">
                 <div className="metric">
-                  <div className="metric__value" id="income-value">$82,000</div>
+              
+                    <div className="metric__value" id="income-value">${stats.income}</div>
                   <p className="metric__label metric__label--success">
-                    <span id="income-increase">+14.5%</span> від минулого місяця
+                    <span id="income-increase">+{increaseData.incomeIncrease}%</span> від минулого місяця
                   </p>
                 </div>
               </div>
@@ -76,23 +288,17 @@ const Home = () => {
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg
-                    className="card__icon card__icon--orange"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <use href="./public/img/icons.svg#icon-trend-down"></use>
+                  <svg className="card__icon card__icon--orange" width="16" height="16" fill="none" stroke="currentColor">
+                    <use href="/img/icons.svg#icon-trend-down"></use>
                   </svg>
                   Витрати
                 </h3>
               </div>
               <div className="card__content">
                 <div className="metric">
-                  <div className="metric__value" id="expense-value">$40,000</div>
+                    <div className="metric__value" id="expense-value">${stats.expenses.toLocaleString()}</div>
                   <p className="metric__label">
-                    <span id="expense-increase">+5.3%</span> від минулого місяця
+                    <span id="expense-increase">+{increaseData.expenseIncrease}%</span> від минулого місяця
                   </p>
                 </div>
               </div>
@@ -101,28 +307,19 @@ const Home = () => {
             <div className="card card--gradient">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg
-                    className="card__icon card__icon--violet"
-                    width="16"
-                    height="16"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <use href="./public/img/icons.svg#icon-briefcase"></use>
+                  <svg className="card__icon card__icon--violet" width="16" height="16" fill="none" stroke="currentColor">
+                    <use href="/img/icons.svg#icon-briefcase"></use>
                   </svg>
                   Прибуток
                 </h3>
               </div>
               <div className="card__content">
                 <div className="metric">
-                  <div
-                    className="metric__value metric__value--accent"
-                    id="profit-value"
-                  >
-                    $42,000
+                  <div className="metric__value metric__value--accent" id="profit-value">
+                    ${stats.profit.toLocaleString()}
                   </div>
                   <p className="metric__label metric__label--accent">
-                    Маржа <span id="margin">51%</span>
+                    Маржа <span id="margin">{stats.margin}%</span>
                   </p>
                 </div>
               </div>
@@ -137,22 +334,18 @@ const Home = () => {
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title card__title--large">
-                  <svg
-                    className="card__icon card__icon--violet"
-                    width="20"
-                    height="20"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <use href="./public/img/icons.svg#icon-pin"></use>
+                  <svg className="card__icon card__icon--violet" width="20" height="20" fill="none" stroke="currentColor">
+                    <use href="/img/icons.svg#icon-pin"></use>
                   </svg>
                   Ринки збуту
                 </h3>
               </div>
               <div className="card__content">
                 <div className="tags" id="markets-list">
-                  <span className="tag tag--accent">Україна</span>
-                  <span className="tag tag--accent">Польща</span>
+        
+                  {companyData.region.split(',').map(item => (
+                      <span key={item} className="tag tag--accent">{item.trim()}</span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -160,113 +353,25 @@ const Home = () => {
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title card__title--large">
-                  <svg
-                    className="card__icon card__icon--violet"
-                    width="20"
-                    height="20"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <use href="./public/img/icons.svg#icon-building"></use>
+                  <svg className="card__icon card__icon--violet" width="20" height="20" fill="none" stroke="currentColor">
+                    <use href="/img/icons.svg#icon-building"></use>
                   </svg>
                   Офіси
                 </h3>
               </div>
               <div className="card__content">
                 <div className="tags" id="offices-list">
-                  <span className="tag">Київ</span>
-                  <span className="tag">Варшава</span>
+
+                   {companyData.offices.split(',').map(item => (
+                      <span key={item} className="tag">{item.trim()}</span>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </section>
-    <div className="modal-setting__backdrop visualy-hidden">
-      <div className="modal-setting">
-        <div className="modal-setting__header">
-          <h2 className="modal-setting__title">Налаштування стартапу</h2>
-          <button
-            className="modal-button modal-setting__close"
-            type="button"
-            aria-label="Закрити"
-          >
-            <svg width="20" height="20" fill="none" stroke="currentColor">
-              <use href="./public/img/icons.svg#icon-close"></use>
-            </svg>
-          </button>
-        </div>
-
-        <form className="modal-setting__form">
-          <div className="form-group">
-            <label className="form-group__label" htmlFor="company-name"
-              >Назва компанії</label
-            >
-            <input
-              className="form-group__input"
-              type="text"
-              id="company-name"
-              value="TechStart"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-group__label" htmlFor="company-industry"
-              >Сфера діяльності</label
-            >
-            <div className="form-group__select-wrapper">
-              <select className="form-group__select" id="company-industry">
-                <option value="tech" selected>Технології</option>
-                <option value="fintech">Фінтех</option>
-                <option value="ecommerce">E-commerce</option>
-                <option value="health">Здоров'я</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label className="form-group__label" htmlFor="employees"
-              >Кількість працівників</label
-            >
-            <input
-              className="form-group__input"
-              type="number"
-              id="employees"
-              value="25"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-group__label" htmlFor="markets">Ринки збуту</label>
-            <input
-              className="form-group__input"
-              type="text"
-              id="markets"
-              value="Україна, Польща"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-group__label" htmlFor="offices">Офіси</label>
-            <input
-              className="form-group__input"
-              type="text"
-              id="offices"
-              value="Київ, Варшава"
-            />
-          </div>
-
-          <div className="modal-setting__footer">
-            <button
-              className="modal-setting__button button button--primary button--full"
-              type="submit"
-            >
-              Зберегти
-            </button>
-          </div>
-        </form>
-      </div>
-        </div>
     </div>
-    );
+    </main>
+  );
 }
 export default Home;

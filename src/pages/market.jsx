@@ -1,6 +1,7 @@
 import ShowCompetitors from "../components/competitors-show";
 const Market = () => { 
     return (  
+      <main className="main">
       <div className="main__container">
         <section className="market">
           <div className="market__header">
@@ -19,7 +20,7 @@ const Market = () => {
                 fill="none"
                 stroke="currentColor"
               >
-                <use href="./public/img/icons.svg#icon-trend-up"></use>
+                <use href="/img/icons.svg#icon-trend-up"></use>
               </svg>
               <h3 className="trends__title">Ринкові тренди</h3>
             </div>
@@ -42,7 +43,7 @@ const Market = () => {
                       fill="none"
                       stroke="currentColor"
                     >
-                      <use href="./public/img/icons.svg#icon-bar-chart"></use>
+                      <use href="/img/icons.svg#icon-bar-chart"></use>
                     </svg>
                     <span className="trend-card__percentage">Зростання: +156%</span>
                   </div>
@@ -66,7 +67,7 @@ const Market = () => {
                       fill="none"
                       stroke="currentColor"
                     >
-                      <use href="./public/img/icons.svg#icon-bar-chart"></use>
+                      <use href="/img/icons.svg#icon-bar-chart"></use>
                     </svg>
                     <span className="trend-card__percentage">Зростання: +89%</span>
                   </div>
@@ -90,7 +91,7 @@ const Market = () => {
                       fill="none"
                       stroke="currentColor"
                     >
-                      <use href="./public/img/icons.svg#icon-bar-chart"></use>
+                      <use href="/img/icons.svg#icon-bar-chart"></use>
                     </svg>
                     <span className="trend-card__percentage">Зростання: +124%</span>
                   </div>
@@ -114,7 +115,7 @@ const Market = () => {
                       fill="none"
                       stroke="currentColor"
                     >
-                      <use href="./public/img/icons.svg#icon-bar-chart"></use>
+                      <use href="/img/icons.svg#icon-bar-chart"></use>
                     </svg>
                     <span className="trend-card__percentage">Зростання: +67%</span>
                   </div>
@@ -132,7 +133,7 @@ const Market = () => {
                 fill="none"
                 stroke="currentColor"
               >
-                <use href="./public/img/icons.svg#icon-building"></use>
+                <use href="/img/icons.svg#icon-building"></use>
               </svg>
               <h3 className="competitors__title">Конкуренти</h3>
             </div>
@@ -150,6 +151,7 @@ const Market = () => {
           </div>
         </section>
       </div>
+    </main>
     );
 }
 export default Market;

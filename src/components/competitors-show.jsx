@@ -20,7 +20,7 @@ const CompetitorCard = ({ competitor }) => {
                           fill="none"
                           stroke="currentColor"
                         >
-                          <use href="./public/img/icons.svg#icon-user"></use>
+                          <use href="/img/icons.svg#icon-user"></use>
                         </svg>
                         <span>Працівники</span>
                       </div>
@@ -35,7 +35,7 @@ const CompetitorCard = ({ competitor }) => {
                           fill="none"
                           stroke="currentColor"
                         >
-                          <use href="./public/img/icons.svg#icon-dollar"></use>
+                          <use href="/img/icons.svg#icon-dollar"></use>
                         </svg>
                         <span>Дохід</span>
                       </div>
@@ -51,7 +51,7 @@ const CompetitorCard = ({ competitor }) => {
                           stroke="currentColor"
                         >
                           <use
-                            href="./public/img/icons.svg#icon-trend-up"
+                            href="/img/icons.svg#icon-trend-up"
                           ></use>
                         </svg>
                         <span>Зростання</span>
@@ -68,7 +68,7 @@ const CompetitorCard = ({ competitor }) => {
                         fill="none"
                         stroke="currentColor"
                       >
-                        <use href="./public/img/icons.svg#icon-pin"></use>
+                        <use href="/img/icons.svg#icon-pin"></use>
                       </svg>
                       <span>Ринки збуту</span>
                     </div>

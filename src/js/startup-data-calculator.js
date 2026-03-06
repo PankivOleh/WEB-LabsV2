@@ -108,51 +108,70 @@ const calculateExpenses = (employees, industry, offices) => {
   expenses += offices.length * industryData.officeCost;
   return expenses;
 };
-let employees, industry, regions, offices;
-
-if (localStorage.getItem("settings") === null) {
-  employees = document.getElementById("employee-value").textContent;
-  industry = document.getElementById("industry").textContent.toLowerCase();
-  const marketsText = Array.from(
-    document.querySelectorAll("#markets-list .tag:not(.tag--dashed)"),
-  ).map((tag) => tag.textContent);
-  regions = marketsText.length > 0 ? marketsText : ["ukraine"];
-  const officesText = Array.from(
-    document.querySelectorAll("#offices-list .tag:not(.tag--dashed)"),
-  ).map((tag) => tag.textContent);
-  offices = officesText.length > 0 ? officesText : ["kyiv"];
-} else {
-  const settings = JSON.parse(localStorage.getItem("settings"));
-  employees = settings.employees;
-  industry = settings.industry;
-  regions = settings.markets.split(",").map((m) => m.trim());
-  offices = settings.offices.split(",").map((o) => o.trim());
-}
-
-const revenue = calculateRevenue(Number(employees), industry, regions);
-const expenses = calculateExpenses(Number(employees), industry, offices);
-const profit = revenue - expenses;
-
-const financialData = {
-  revenue: revenue,
-  expenses: expenses,
-  profit: profit,
-};
-
-localStorage.setItem("financialData", JSON.stringify(financialData));
 
 const applyFinancialData = () => {
   if (localStorage.getItem("financialData") === null) {
     return;
   }
   const financialData = JSON.parse(localStorage.getItem("financialData"));
-  document.getElementById("income-value").textContent =
-    financialData.revenue.toFixed(2);
-  document.getElementById("expense-value").textContent =
-    financialData.expenses.toFixed(2);
-  document.getElementById("profit-value").textContent =
-    financialData.profit.toFixed(2);
-  document.getElementById("margin").textContent =
-    ((financialData.profit / financialData.revenue) * 100).toFixed(1) + "%";
+  const incomeEl = document.getElementById("income-value");
+  const expenseEl = document.getElementById("expense-value");
+  const profitEl = document.getElementById("profit-value");
+  const marginEl = document.getElementById("margin");
+  
+  if (incomeEl) incomeEl.textContent = financialData.revenue.toFixed(2);
+  if (expenseEl) expenseEl.textContent = financialData.expenses.toFixed(2);
+  if (profitEl) profitEl.textContent = financialData.profit.toFixed(2);
+  if (marginEl) marginEl.textContent = ((financialData.profit / financialData.revenue) * 100).toFixed(1) + "%";
 };
-applyFinancialData();
+
+function initFinancialData() {
+  let employees, industry, regions, offices;
+
+  if (localStorage.getItem("settings") === null) {
+    const empEl = document.getElementById("employee-value");
+    const indEl = document.getElementById("industry");
+    
+    if (!empEl || !indEl) {
+      console.warn("Finance elements not found, will retry");
+      return;
+    }
+    
+    employees = empEl.textContent;
+    industry = indEl.textContent.toLowerCase();
+    const marketsText = Array.from(
+      document.querySelectorAll("#markets-list .tag:not(.tag--dashed)"),
+    ).map((tag) => tag.textContent);
+    regions = marketsText.length > 0 ? marketsText : ["ukraine"];
+    const officesText = Array.from(
+      document.querySelectorAll("#offices-list .tag:not(.tag--dashed)"),
+    ).map((tag) => tag.textContent);
+    offices = officesText.length > 0 ? officesText : ["kyiv"];
+  } else {
+    const settings = JSON.parse(localStorage.getItem("settings"));
+    employees = settings.employees;
+    industry = settings.industry;
+    regions = settings.markets.split(",").map((m) => m.trim());
+    offices = settings.offices.split(",").map((o) => o.trim());
+  }
+
+  const revenue = calculateRevenue(Number(employees), industry, regions);
+  const expenses = calculateExpenses(Number(employees), industry, offices);
+  const profit = revenue - expenses;
+
+  const financialData = {
+    revenue: revenue,
+    expenses: expenses,
+    profit: profit,
+  };
+
+  localStorage.setItem("financialData", JSON.stringify(financialData));
+  applyFinancialData();
+}
+
+// Ініціалізація після завантаження DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFinancialData);
+} else {
+  initFinancialData();
+}

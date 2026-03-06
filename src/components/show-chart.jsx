@@ -98,7 +98,7 @@ const ShowChart = () => {
                 financeChartInstance.destroy(); 
             }
         };
-    }, []);
+    });
 
     return (
         <>

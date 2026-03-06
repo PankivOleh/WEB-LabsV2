@@ -1,8 +1,3 @@
-const curentData = {
-  employees: document.getElementById("employee-value").textContent,
-  income: document.getElementById("income-value").textContent,
-  expenses: document.getElementById("expense-value").textContent,
-};
 const cleanNum = (str) => Number(str.replace(/[^0-9.-]+/g, "")) || 0;
 const createHistory = (data, month) => {
   let history = [
@@ -86,13 +81,36 @@ const applyHistory = () => {
     previous.expenses,
   );
 };
-let month = 12;
-if (
-  localStorage.getItem("history") === null ||
-  localStorage.getItem("history") === undefined
-) {
-  const simulatedHistory = createHistory(curentData, month);
-  localStorage.setItem("history", JSON.stringify(simulatedHistory));
-  console.log(simulatedHistory);
+
+// Ініціалізація після завантаження DOM
+function initStartupHistory() {
+  const curentData = {
+    employees: document.getElementById("employee-value")?.textContent,
+    income: document.getElementById("income-value")?.textContent,
+    expenses: document.getElementById("expense-value")?.textContent,
+  };
+  
+  if (!curentData.employees || !curentData.income || !curentData.expenses) {
+    console.warn("DOM elements for startup data not found yet");
+    return;
+  }
+
+  let month = 12;
+  if (
+    localStorage.getItem("history") === null ||
+    localStorage.getItem("history") === undefined
+  ) {
+    const simulatedHistory = createHistory(curentData, month);
+    localStorage.setItem("history", JSON.stringify(simulatedHistory));
+    console.log(simulatedHistory);
+  }
+  applyHistory();
 }
-applyHistory();
+
+// Чекаємо завантаження DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initStartupHistory);
+} else {
+  // DOM уже завантажений
+  initStartupHistory();
+}

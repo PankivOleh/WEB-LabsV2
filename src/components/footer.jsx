@@ -16,7 +16,7 @@ const Footer = () => {
                                     fill="none"
                                     stroke="currentColor"
                                 >
-                                    <use href="./public/img/icons.svg#icon-rocket"></use>
+                                    <use href="/img/icons.svg#icon-rocket"></use>
                                 </svg>
                             </div>
                             <h3 className="footer__title">Startup Simulator</h3>
@@ -57,7 +57,7 @@ const Footer = () => {
                                     fill="none"
                                     stroke="currentColor"
                                 >
-                                    <use href="./public/img/icons.svg#icon-social-1"></use>
+                                    <use href="/img/icons.svg#icon-social-1"></use>
                                 </svg>
                             </a>
                             <a href="#" className="social__link">
@@ -68,7 +68,7 @@ const Footer = () => {
                                     fill="none"
                                     stroke="currentColor"
                                 >
-                                    <use href="./public/img/icons.svg#icon-social-2"></use>
+                                    <use href="/img/icons.svg#icon-social-2"></use>
                                 </svg>
                             </a>
                         </div>

@@ -12,7 +12,7 @@ const Header = () => {
               fill="none"
               stroke="currentColor"
             >
-              <use href="./public/img/icons.svg#icon-rocket"></use>
+              <use href="/img/icons.svg#icon-rocket"></use>
             </svg>
           </div>
           <h1 className="header__title">Startup Simulator</h1>
@@ -27,7 +27,7 @@ const Header = () => {
               fill="none"
               stroke="currentColor"
             >
-              <use href="./public/img/icons.svg#icon-rocket"></use>
+              <use href="/img/icons.svg#icon-rocket"></use>
             </svg>
             <span className="nav__text">Мій стартап</span>
           </Link>
@@ -39,7 +39,7 @@ const Header = () => {
               fill="none"
               stroke="currentColor"
             >
-              <use href="./public/img/icons.svg#icon-trend-up"></use>
+              <use href="/img/icons.svg#icon-trend-up"></use>
             </svg>
             <span className="nav__text">Ринок</span>
           </Link>
@@ -51,7 +51,7 @@ const Header = () => {
               fill="none"
               stroke="currentColor"
             >
-              <use href="./public/img/icons.svg#icon-user"></use>
+              <use href="/img/icons.svg#icon-user"></use>
             </svg>
             <span className="nav__text">Інвестори</span>
           </Link>

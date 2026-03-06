@@ -1,12 +1,3 @@
-const modalButton = document.querySelectorAll('.modal-button');
-const modalSetting = document.querySelector('.modal-setting__backdrop');
-
-modalButton.forEach(button => {
-  button.addEventListener('click', () => {
-    modalSetting.classList.toggle('visualy-hidden');
-  });
-});
-
 const applyModalSettings = () => {
   if (localStorage.getItem("settings") === null) {
     return;
