@@ -1,15 +1,74 @@
 import ShowChart from "../components/show-chart";
 import ModalSettings from "../components/modal-setting";
+import ShowTablet from "../components/show-tablet";
 import { useEffect, useState } from "react";
 
 const calculateStats = (data) => {
   const marketRegions = [
-    { name: "North America", multiplier: 1.7, aliases: ["north america", "america", "usa", "сша", "америка", "canada", "канада", "united states"] },
-    { name: "Western/Northern Europe", multiplier: 1.5, aliases: ["europe", "європа", "uk", "britain", "великобританія", "germany", "німеччина", "france", "франція", "sweden", "швеція"] },
-    { name: "Eastern Europe", multiplier: 0.8, aliases: ["eastern europe", "східна європа", "ukraine", "україна", "poland", "польща", "romania", "румунія", "czech"] },
-    { name: "Asia", multiplier: 1.1, aliases: ["asia", "азія", "china", "китай", "japan", "японія", "india", "індія", "korea", "корея"] },
+    {
+      name: "North America",
+      multiplier: 1.7,
+      aliases: [
+        "north america",
+        "america",
+        "usa",
+        "сша",
+        "америка",
+        "canada",
+        "канада",
+        "united states",
+      ],
+    },
+    {
+      name: "Western/Northern Europe",
+      multiplier: 1.5,
+      aliases: [
+        "europe",
+        "європа",
+        "uk",
+        "britain",
+        "великобританія",
+        "germany",
+        "німеччина",
+        "france",
+        "франція",
+        "sweden",
+        "швеція",
+      ],
+    },
+    {
+      name: "Eastern Europe",
+      multiplier: 0.8,
+      aliases: [
+        "eastern europe",
+        "східна європа",
+        "ukraine",
+        "україна",
+        "poland",
+        "польща",
+        "romania",
+        "румунія",
+        "czech",
+      ],
+    },
+    {
+      name: "Asia",
+      multiplier: 1.1,
+      aliases: [
+        "asia",
+        "азія",
+        "china",
+        "китай",
+        "japan",
+        "японія",
+        "india",
+        "індія",
+        "korea",
+        "корея",
+      ],
+    },
   ];
-  
+
   const industryStats = {
     ecommerce: { baseRevenuePerEmp: 3300, avgSalary: 3000, officeCost: 9000 },
     tech: { baseRevenuePerEmp: 4200, avgSalary: 3500, officeCost: 10000 },
@@ -20,19 +79,25 @@ const calculateStats = (data) => {
   const getRegionMultiplier = (region) => {
     let multiplier = 1;
     const cleanInput = region.trim().toLowerCase();
-    const foundRegion = marketRegions.find((r) => r.aliases.includes(cleanInput));
+    const foundRegion = marketRegions.find((r) =>
+      r.aliases.includes(cleanInput),
+    );
     return foundRegion ? foundRegion.multiplier : multiplier;
   };
 
   const calculateGeneralMultiplier = (regionsString) => {
-    const regionsArray = typeof regionsString === 'string' ? regionsString.split(',') : [];
+    const regionsArray =
+      typeof regionsString === "string" ? regionsString.split(",") : [];
     if (regionsArray.length === 0) return 1;
 
     let multipliers = [];
     for (let region of regionsArray) {
       multipliers.push(getRegionMultiplier(region));
     }
-    return multipliers.reduce((avg, current) => avg + current, 0) / multipliers.length;
+    return (
+      multipliers.reduce((avg, current) => avg + current, 0) /
+      multipliers.length
+    );
   };
 
   const calculateEmployeeRevenue = (employeeCount, industryData) => {
@@ -41,20 +106,27 @@ const calculateStats = (data) => {
 
   const calculateRevenue = (employees, industry, regions) => {
     const multiplier = calculateGeneralMultiplier(regions);
-    const industryData = industryStats[industry.toLowerCase()] || industryStats.tech;
+    const industryData =
+      industryStats[industry.toLowerCase()] || industryStats.tech;
     return calculateEmployeeRevenue(employees, industryData) * multiplier;
   };
 
   const calculateExpenses = (employees, industry, offices) => {
-    const industryData = industryStats[industry.toLowerCase()] || industryStats.tech;
+    const industryData =
+      industryStats[industry.toLowerCase()] || industryStats.tech;
     let expenses = employees * industryData.avgSalary;
-    const officeCount = typeof offices === 'string' ? offices.split(',').length : 1;
+    const officeCount =
+      typeof offices === "string" ? offices.split(",").length : 1;
     expenses += officeCount * industryData.officeCost;
     return expenses;
   };
 
   const income = calculateRevenue(data.employee, data.industry, data.region);
-  const expenses = calculateExpenses(data.employee, data.industry, data.offices);
+  const expenses = calculateExpenses(
+    data.employee,
+    data.industry,
+    data.offices,
+  );
   const profit = income - expenses;
   const margin = income > 0 ? ((profit / income) * 100).toFixed(1) : 0;
 
@@ -62,11 +134,9 @@ const calculateStats = (data) => {
     income: Math.round(income),
     expenses: Math.round(expenses),
     profit: Math.round(profit),
-    margin: margin
+    margin: margin,
   };
-}
-
-
+};
 
 const cleanNum = (value) => {
   if (typeof value === "number") return value;
@@ -121,13 +191,13 @@ const percentChange = (current, previous) => {
   }
   let procent = ((current - previous) / previous) * 100;
   if (procent > 0) {
-    return  + procent.toFixed(1) ;
+    return +procent.toFixed(1);
   }
-  return procent.toFixed(1) ;
+  return procent.toFixed(1);
 };
 const intChange = (current, previous) => {
   if (current > previous) {
-    return + (current - previous);
+    return +(current - previous);
   } else if (current < previous) {
     return previous - current;
   } else {
@@ -135,38 +205,28 @@ const intChange = (current, previous) => {
   }
 };
 
-
 const applyHistory = (history) => {
   const current = history[history.length - 1];
   const previous = history[history.length - 2];
-  
-  const employeeIncrease = intChange(
-    current.employees,
-    previous.employees,
-  );
-  const incomeIncrease = percentChange(
-    current.income,
-    previous.income,
-  );
-  const expenseIncrease= percentChange(
-    current.expenses,
-    previous.expenses,
-  );
+
+  const employeeIncrease = intChange(current.employees, previous.employees);
+  const incomeIncrease = percentChange(current.income, previous.income);
+  const expenseIncrease = percentChange(current.expenses, previous.expenses);
   const increaseData = {
     employeeIncrease: employeeIncrease,
     incomeIncrease: incomeIncrease,
-    expenseIncrease: expenseIncrease
+    expenseIncrease: expenseIncrease,
   };
   return increaseData;
 };
 
-function initStartupHistory(employees , income , expenses) {
+function initStartupHistory(employees, income, expenses) {
   const curentData = {
     employees: employees,
     income: income,
-    expenses: expenses
+    expenses: expenses,
   };
-  
+
   if (!curentData.employees || !curentData.income || !curentData.expenses) {
     console.warn("DOM elements for startup data not found yet");
     return;
@@ -174,16 +234,11 @@ function initStartupHistory(employees , income , expenses) {
 
   let month = 12;
 
-    const simulatedHistory = createHistory(curentData, month);
+  const simulatedHistory = createHistory(curentData, month);
   return simulatedHistory;
-
 }
 
-
-
-
-const Home = () => { 
-
+const Home = () => {
   const [companyData, submitData] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("financialData"));
     if (saved) {
@@ -194,62 +249,70 @@ const Home = () => {
         industry: "tech",
         employee: 25,
         region: "Україна, Польща",
-        offices: "Київ, Варшава"
-      }
+        offices: "Київ, Варшава",
+      };
     }
-  })
+  });
 
   const stats = calculateStats(companyData);
 
   const handleSavedData = (newData) => {
     submitData(newData);
     localStorage.setItem("financialData", JSON.stringify(newData));
-  }
+  };
 
-  const displayIndustry = {
-    tech: "Технології",
-    fintech: "Фінтех",
-    ecommerce: "E-commerce",
-    health: "Здоров'я"
-  }[companyData.industry] || companyData.industry;
+  const displayIndustry =
+    {
+      tech: "Технології",
+      fintech: "Фінтех",
+      ecommerce: "E-commerce",
+      health: "Здоров'я",
+    }[companyData.industry] || companyData.industry;
 
   const [increaseData, setIncreaseData] = useState({
     employeeIncrease: "+0",
     incomeIncrease: "+0%",
-    expenseIncrease: "+0%"
+    expenseIncrease: "+0%",
   });
 
   useEffect(() => {
-    const newHistory = initStartupHistory(companyData.employee, stats.income, stats.expenses);
+    const newHistory = initStartupHistory(
+      companyData.employee,
+      stats.income,
+      stats.expenses,
+    );
     localStorage.setItem("history", JSON.stringify(newHistory));
     const increaseData = applyHistory(newHistory);
     setIncreaseData(increaseData);
   }, [companyData, stats.income, stats.expenses]);
 
-
-
-
   return (
     <main className="main">
-    <div className="main__container">
+      <div className="main__container">
         <section className="startup">
           <div className="startup__header">
             <div className="startup__info">
-                <h2 className="startup__name" id="name">{companyData.name}</h2>
-                <p className="startup__industry" id="industry">{companyData.industry}</p>
+              <h2 className="startup__name" id="name">
+                {companyData.name}
+              </h2>
+              <p className="startup__industry" id="industry">
+                {companyData.industry}
+              </p>
             </div>
-          
-            <ModalSettings 
-                companyData={companyData} 
-                onSave={handleSavedData} 
-            />
 
+            <ModalSettings companyData={companyData} onSave={handleSavedData} />
           </div>
           <div className="metrics">
             <div className="card card--highlight">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg className="card__icon card__icon--violet" width="16" height="16" fill="none" stroke="currentColor">
+                  <svg
+                    className="card__icon card__icon--violet"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <use href="/img/icons.svg#icon-users"></use>
                   </svg>
                   Працівники
@@ -257,9 +320,15 @@ const Home = () => {
               </div>
               <div className="card__content">
                 <div className="metric">
-                    <div className="metric__value" id="employee-value">{companyData.employee}</div>
+                  <div className="metric__value" id="employee-value">
+                    {companyData.employee}
+                  </div>
                   <p className="metric__label metric__label--success">
-                    <span id="employee-increase"> { increaseData.employeeIncrease}</span> цього місяця
+                    <span id="employee-increase">
+                      {" "}
+                      {increaseData.employeeIncrease}
+                    </span>{" "}
+                    цього місяця
                   </p>
                 </div>
               </div>
@@ -268,7 +337,13 @@ const Home = () => {
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg className="card__icon card__icon--green" width="16" height="16" fill="none" stroke="currentColor">
+                  <svg
+                    className="card__icon card__icon--green"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <use href="/img/icons.svg#icon-dollar"></use>
                   </svg>
                   Дохід
@@ -276,10 +351,14 @@ const Home = () => {
               </div>
               <div className="card__content">
                 <div className="metric">
-              
-                    <div className="metric__value" id="income-value">${stats.income}</div>
+                  <div className="metric__value" id="income-value">
+                    ${stats.income}
+                  </div>
                   <p className="metric__label metric__label--success">
-                    <span id="income-increase">+{increaseData.incomeIncrease}%</span> від минулого місяця
+                    <span id="income-increase">
+                      +{increaseData.incomeIncrease}%
+                    </span>{" "}
+                    від минулого місяця
                   </p>
                 </div>
               </div>
@@ -288,7 +367,13 @@ const Home = () => {
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg className="card__icon card__icon--orange" width="16" height="16" fill="none" stroke="currentColor">
+                  <svg
+                    className="card__icon card__icon--orange"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <use href="/img/icons.svg#icon-trend-down"></use>
                   </svg>
                   Витрати
@@ -296,9 +381,14 @@ const Home = () => {
               </div>
               <div className="card__content">
                 <div className="metric">
-                    <div className="metric__value" id="expense-value">${stats.expenses.toLocaleString()}</div>
+                  <div className="metric__value" id="expense-value">
+                    ${stats.expenses.toLocaleString()}
+                  </div>
                   <p className="metric__label">
-                    <span id="expense-increase">+{increaseData.expenseIncrease}%</span> від минулого місяця
+                    <span id="expense-increase">
+                      +{increaseData.expenseIncrease}%
+                    </span>{" "}
+                    від минулого місяця
                   </p>
                 </div>
               </div>
@@ -307,7 +397,13 @@ const Home = () => {
             <div className="card card--gradient">
               <div className="card__header">
                 <h3 className="card__title">
-                  <svg className="card__icon card__icon--violet" width="16" height="16" fill="none" stroke="currentColor">
+                  <svg
+                    className="card__icon card__icon--violet"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <use href="/img/icons.svg#icon-briefcase"></use>
                   </svg>
                   Прибуток
@@ -315,7 +411,10 @@ const Home = () => {
               </div>
               <div className="card__content">
                 <div className="metric">
-                  <div className="metric__value metric__value--accent" id="profit-value">
+                  <div
+                    className="metric__value metric__value--accent"
+                    id="profit-value"
+                  >
                     ${stats.profit.toLocaleString()}
                   </div>
                   <p className="metric__label metric__label--accent">
@@ -327,14 +426,25 @@ const Home = () => {
           </div>
 
           <div className="charts">
-            <ShowChart/>
+            <ShowChart
+              historyData={JSON.parse(localStorage.getItem("history"))}
+            />
+          </div>
+          <div className="tablet">
+            <ShowTablet />
           </div>
 
           <div className="info-section">
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title card__title--large">
-                  <svg className="card__icon card__icon--violet" width="20" height="20" fill="none" stroke="currentColor">
+                  <svg
+                    className="card__icon card__icon--violet"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <use href="/img/icons.svg#icon-pin"></use>
                   </svg>
                   Ринки збуту
@@ -342,9 +452,10 @@ const Home = () => {
               </div>
               <div className="card__content">
                 <div className="tags" id="markets-list">
-        
-                  {companyData.region.split(',').map(item => (
-                      <span key={item} className="tag tag--accent">{item.trim()}</span>
+                  {companyData.region.split(",").map((item) => (
+                    <span key={item} className="tag tag--accent">
+                      {item.trim()}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -353,7 +464,13 @@ const Home = () => {
             <div className="card">
               <div className="card__header">
                 <h3 className="card__title card__title--large">
-                  <svg className="card__icon card__icon--violet" width="20" height="20" fill="none" stroke="currentColor">
+                  <svg
+                    className="card__icon card__icon--violet"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <use href="/img/icons.svg#icon-building"></use>
                   </svg>
                   Офіси
@@ -361,17 +478,18 @@ const Home = () => {
               </div>
               <div className="card__content">
                 <div className="tags" id="offices-list">
-
-                   {companyData.offices.split(',').map(item => (
-                      <span key={item} className="tag">{item.trim()}</span>
+                  {companyData.offices.split(",").map((item) => (
+                    <span key={item} className="tag">
+                      {item.trim()}
+                    </span>
                   ))}
                 </div>
               </div>
             </div>
           </div>
         </section>
-    </div>
+      </div>
     </main>
   );
-}
+};
 export default Home;

@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const Header = () => { 
-    return (<header className="header">
+const Header = () => {
+  const getNavClass = ({ isActive }) =>
+    `nav__item ${isActive ? "nav__item--active" : ""}`;
+
+  return (
+    <header className="header">
       <div className="header__container">
         <div className="header__brand">
           <div className="logo">
@@ -19,7 +23,7 @@ const Header = () => {
         </div>
 
         <nav className="nav">
-          <Link to="/" className="nav__item nav__item--active">
+          <NavLink to="/" className={getNavClass}>
             <svg
               className="nav__icon"
               width="16"
@@ -30,8 +34,8 @@ const Header = () => {
               <use href="/img/icons.svg#icon-rocket"></use>
             </svg>
             <span className="nav__text">Мій стартап</span>
-          </Link>
-          <Link to="/market" className="nav__item">
+          </NavLink>
+          <NavLink to="/market" className={getNavClass}>
             <svg
               className="nav__icon"
               width="16"
@@ -42,8 +46,8 @@ const Header = () => {
               <use href="/img/icons.svg#icon-trend-up"></use>
             </svg>
             <span className="nav__text">Ринок</span>
-          </Link>
-          <Link to="/investors" className="nav__item">
+          </NavLink>
+          <NavLink to="/investors" className={getNavClass}>
             <svg
               className="nav__icon"
               width="16"
@@ -54,9 +58,10 @@ const Header = () => {
               <use href="/img/icons.svg#icon-user"></use>
             </svg>
             <span className="nav__text">Інвестори</span>
-          </Link>
+          </NavLink>
         </nav>
       </div>
-    </header>);
-}
+    </header>
+  );
+};
 export default Header;

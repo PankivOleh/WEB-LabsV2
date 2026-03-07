@@ -1,358 +1,357 @@
 .logo,
 .investor-logo {
-    width: 2.5rem;
-    height: 2.5rem;
-    background: $grad-logo;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: $grad-logo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &__icon {
-        color: $color-white;
-        stroke-width: 2;
-    }
+  &__icon {
+    color: $color-white;
+    stroke-width: 2;
+  }
 }
 
 .logo {
-    border-radius: 0.75rem;
+  border-radius: 0.75rem;
 }
 
 .investor-logo {
-    border-radius: 0.5rem;
-    flex-shrink: 0;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
 }
 
 .badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
 
-    &--high,
-    &--small,
-    &--specialized {
-        background: $color-badge-green-bg;
-        color: $color-badge-green-txt;
-    }
+  &--high,
+  &--small,
+  &--specialized {
+    background: $color-badge-green-bg;
+    color: $color-badge-green-txt;
+  }
 
-    &--medium,
-    &--angel {
-        background: $color-badge-yellow-bg;
-        color: $color-badge-yellow-txt;
-    }
+  &--medium,
+  &--angel {
+    background: $color-badge-yellow-bg;
+    color: $color-badge-yellow-txt;
+  }
 
-    &--large,
-    &--venture {
-        background: $color-badge-purple-bg;
-        color: $color-badge-purple-txt;
-    }
+  &--large,
+  &--venture {
+    background: $color-badge-purple-bg;
+    color: $color-badge-purple-txt;
+  }
 
-    &--private {
-        background: $color-badge-blue-bg;
-        color: $color-badge-blue-txt;
-    }
+  &--private {
+    background: $color-badge-blue-bg;
+    color: $color-badge-blue-txt;
+  }
 }
 
 .tags,
 .markets-list,
 .focus-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .markets-list,
 .focus-list {
-    gap: 0.25rem;
+  gap: 0.25rem;
 }
 
 .tag {
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    background: $color-bg-muted;
-    color: #475569;
-    border: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  background: $color-bg-muted;
+  color: #475569;
+  border: none;
 
-    &--accent {
-        background: $color-brand-light;
-        color: $color-brand;
+  &--accent {
+    background: $color-brand-light;
+    color: $color-brand;
+  }
+
+  &--dashed {
+    border: 2px dashed $color-border-dashed;
+    background: transparent;
+    color: $color-brand;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: $transition-base;
+
+    &:hover {
+      background: $color-brand-light;
     }
+  }
 
-    &--dashed {
-        border: 2px dashed $color-border-dashed;
-        background: transparent;
-        color: $color-brand;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.25rem;
-        transition: $transition-base;
-
-        &:hover {
-            background: $color-brand-light;
-        }
-    }
-
-    &__icon {
-        stroke-width: 2;
-    }
+  &__icon {
+    stroke-width: 2;
+  }
 }
 
 .market-tag,
 .focus-tag {
-    padding: 0.125rem 0.5rem;
-    background: $color-brand-lightest;
-    color: $color-brand;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  background: $color-brand-lightest;
+  color: $color-brand;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
 }
 
 .markets-label,
 .focus-label {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.75rem;
-    color: $color-text-muted;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: $color-text-muted;
 
-    &__icon {
-        stroke-width: 2;
-    }
+  &__icon {
+    stroke-width: 2;
+  }
 }
 
 .metric {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    &__value {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: $color-text-main;
+  &__value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $color-text-main;
 
-        &--accent {
-            color: $color-brand;
-        }
+    &--accent {
+      color: $color-brand;
+    }
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    color: $color-text-muted;
+    margin-top: 0.25rem;
+
+    &--success {
+      color: $color-success;
     }
 
-    &__label {
-        font-size: 0.75rem;
-        color: $color-text-muted;
-        margin-top: 0.25rem;
-
-        &--success {
-            color: $color-success;
-        }
-
-        &--accent {
-            color: $color-brand;
-        }
+    &--accent {
+      color: $color-brand;
     }
+  }
 }
 
 .stat,
 .investor-stat {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
 
-    &__label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: $color-text-muted;
-    }
-
-    &__icon {
-        stroke-width: 2;
-    }
-
-    &__value {
-        font-weight: 500;
-        color: $color-text-main;
-
-        &--success {
-            color: $color-success;
-        }
-    }
-}
-
-.chart {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    &__placeholder {
-        width: 100%;
-        height: 100%;
-        background: $grad-chart;
-        border-radius: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    &__message {
-        color: $color-text-muted;
-        font-size: 0.875rem;
-    }
-    &__img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-.currency-button {
-        padding: 0.4rem 1rem;
-        border: 1px solid $color-border;
-        background: transparent;
-        border-radius: 0.5rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: $color-text-muted;
-        cursor: pointer;
-        transition: $transition-base;
-
-        &:hover {
-            background: $color-bg-muted;
-            color: $color-text-main;
-        }
-
-        &--active {
-            background: $color-brand;
-            color: $color-white;
-            border-color: $color-brand;
-
-            &:hover {
-                background: $color-brand-hover;
-                color: $color-white;
-            }
-        }
-}
-.form-group{
-    display: flex;
-    flex-direction: column;
-    &__label{
-        font-size: 0.875rem;
-        font-weight: 500;
-    }
-    &__input{
-        padding: 0.5rem;
-        border: 1px solid $color-border;
-        border-radius: 0.5rem;
-        font-size: 0.875rem;
-        color: $color-text-main;
-        transition: $transition-base;
-        background-color: $color-bg-muted;
-
-        &:focus {
-            outline: none;
-            border-color: $color-brand;
-            box-shadow: 0 0 0 2px rgba($color-brand, 0.2);
-        }
-    }
-    &__select__wrapper{
-        width: 100%;
-    }
-    &__select{
-        padding: 0.5rem;
-            border: 1px solid $color-border;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            color: $color-text-main;
-            transition: $transition-base;
-            background-color: $color-bg-muted;
-            width: 100%;
-            }
-        
-            &:focus {
-                outline: none;
-                border-color: $color-brand;
-                box-shadow: 0 0 0 2px rgba($color-brand, 0.2);
-            }
-    }
-.chart-filter {
-    position: relative;
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-}
-
-
-.chart-filter__btn {
-    background: transparent;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.5rem;
-    padding: 0.4rem 0.6rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    color: #64748b;
-    transition: all 0.2s;
-}
-
-.chart-filter__btn:hover {
-    background: #f1f5f9;
-    color: #0f172a;
-}
-
-
-.chart-filter__dropdown {
-    position: absolute;
-    bottom: calc(100% + 0.5rem);
-
-    right: 0;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    min-width: 180px;
-    z-index: 100;
-
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.2s ease;
-}
-
-
-.chart-filter__dropdown.is-open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-
-.chart-filter__title {
-    margin: 0 0 0.75rem 0;
-    font-size: 0.875rem;
-    color: #0f172a;
-    font-weight: 600;
-}
-
-.chart-filter__option {
+  &__label {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    color: $color-text-muted;
+  }
+
+  &__icon {
+    stroke-width: 2;
+  }
+
+  &__value {
+    font-weight: 500;
+    color: $color-text-main;
+
+    &--success {
+      color: $color-success;
+    }
+  }
+}
+
+.chart {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    background: $grad-chart;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__message {
+    color: $color-text-muted;
     font-size: 0.875rem;
-    color: #475569;
-    cursor: pointer;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.currency-button {
+  padding: 0.4rem 1rem;
+  border: 1px solid $color-border;
+  background: transparent;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover {
+    background: $color-bg-muted;
+    color: $color-text-main;
+  }
+
+  &--active {
+    background: $color-brand;
+    color: $color-white;
+    border-color: $color-brand;
+
+    &:hover {
+      background: $color-brand-hover;
+      color: $color-white;
+    }
+  }
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  &__input {
+    padding: 0.5rem;
+    border: 1px solid $color-border;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: $color-text-main;
+    transition: $transition-base;
+    background-color: $color-bg-muted;
+
+    &:focus {
+      outline: none;
+      border-color: $color-brand;
+      box-shadow: 0 0 0 2px rgba($color-brand, 0.2);
+    }
+  }
+  &__select__wrapper {
+    width: 100%;
+  }
+  &__select {
+    padding: 0.5rem;
+    border: 1px solid $color-border;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: $color-text-main;
+    transition: $transition-base;
+    background-color: $color-bg-muted;
+    width: 100%;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-brand;
+    box-shadow: 0 0 0 2px rgba($color-brand, 0.2);
+  }
+}
+.chart-filter {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.chart-filter__btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #64748b;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.chart-filter__btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.chart-filter__dropdown {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  min-width: 180px;
+  z-index: 100;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+
+.chart-filter__dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.chart-filter__title {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.875rem;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.chart-filter__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #475569;
+  cursor: pointer;
 }
 
 .chart-filter__option:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .chart-filter__checkbox {
-    accent-color: #7c3aed;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+  accent-color: #7c3aed;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
