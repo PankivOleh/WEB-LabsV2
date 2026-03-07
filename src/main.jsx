@@ -1,21 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { HashRouter } from "react-router-dom";
 import App from "./App.jsx";
-import "./js/lists.js"
-import "./js/startup-data-calculator.js"
-import "./js/startup-history.js"
-import "./js/modal-settings.js"
+import "./js/lists.js";
+import "./js/startup-data-calculator.js";
+import "./js/startup-history.js";
+import "./js/modal-settings.js";
 
-
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
-    </React.StrictMode>
+      </HashRouter>
+    </React.StrictMode>,
   );
 }
