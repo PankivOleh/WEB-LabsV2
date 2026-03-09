@@ -1,65 +1,3 @@
-//  <div class="card">
-//               <div class="card__header">
-//                 <h3 class="card__title">Динаміка чистого прибутку</h3>
-//               </div>
-//               <div class="card__content">
-//                 <table
-//                   class="market-table"
-//                   style="
-//                     width: 100%;
-//                     text-align: left;
-//                     border-collapse: collapse;
-//                   "
-//                 >
-//                   <thead>
-//                     <tr style="border-bottom: 2px solid #eee">
-//                       <th style="padding: 10px 0">Місяць</th>
-//                       <th>Доходи</th>
-//                       <th>Витрати</th>
-//                       <th>Чистий прибуток</th>
-//                       <th>Динаміка</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody id="profit-table-body"></tbody>
-//                 </table>
-//                 <div class="charts__setting--currency">
-//                   <button type="button" class="currency-button">
-//                     <svg
-//                       width="14"
-//                       height="14"
-//                       fill="none"
-//                       stroke="currentColor"
-//                     >
-//                       <use href="./img/icons.svg#icon-hryvnia"></use>
-//                       <use href="./public/img/icons.svg#icon-hryvnia"></use>
-//                     </svg>
-//                   </button>
-//                   <button type="button" class="currency-button">
-//                     <svg
-//                       width="14"
-//                       height="14"
-//                       fill="none"
-//                       stroke="currentColor"
-//                     >
-//                       <use href="./img/icons.svg#icon-dollar-sign"></use>
-//                       <use href="./public/img/icons.svg#icon-dollar-sign"></use>
-//                     </svg>
-//                   </button>
-//                   <button type="button" class="currency-button">
-//                     <svg
-//                       width="14"
-//                       height="14"
-//                       fill="none"
-//                       stroke="currentColor"
-//                     >
-//                       <use href="./img/icons.svg#icon-euro"></use>
-//                       <use href="./public/img/icons.svg#icon-euro"></use>
-//                     </svg>
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
 
 import { useState, useEffect } from "react";
 
@@ -129,7 +67,7 @@ const ShowTablet = () => {
         </td>
         <td style={{ color: "#8b5cf6" }}>{currencyIcon + map.income}</td>
         <td style={{ color: "#f97316" }}>{currencyIcon + map.expenses}</td>
-        <td style={{ color: "#10b981" }}>
+        <td style={{ color: "#10b981" , paddingLeft: "24px"}}>
           <strong>{currencyIcon + map.profit}</strong>
         </td>
       </tr>

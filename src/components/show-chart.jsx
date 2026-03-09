@@ -137,7 +137,7 @@ const ShowChart = ({ historyData = [] }) => {
       <h2> Динаміка доходів та витрат</h2>
       <div className="chart">
         <div className="chart__placeholder">
-          <div style={{ width: "100%", height: "100%" }}>
+          <div style={{position:"relative", width: "100%", height: "300px" }}>
             <canvas
               id="financeChart"
               style={{ width: "100%", height: "100%", minHeight: "300px" }}

@@ -3,9 +3,8 @@ import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./js/lists.js";
-import "./js/startup-data-calculator.js";
-import "./js/startup-history.js";
-import "./js/modal-settings.js";
+
+
 
 const rootElement = document.getElementById("root");
 

@@ -1,7 +1,7 @@
 import ShowChart from "../components/show-chart";
 import ModalSettings from "../components/modal-setting";
 import ShowTablet from "../components/show-tablet";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef } from "react";
 
 const calculateStats = (data) => {
   const marketRegions = [
@@ -256,10 +256,6 @@ const Home = () => {
 
   const stats = calculateStats(companyData);
 
-  const handleSavedData = (newData) => {
-    submitData(newData);
-    localStorage.setItem("financialData", JSON.stringify(newData));
-  };
 
   const displayIndustry =
     {
@@ -269,22 +265,34 @@ const Home = () => {
       health: "Здоров'я",
     }[companyData.industry] || companyData.industry;
 
-  const [increaseData, setIncreaseData] = useState({
-    employeeIncrease: "+0",
-    incomeIncrease: "+0%",
-    expenseIncrease: "+0%",
+  const isFirstRender = useRef(true)
+
+ const [history, setHistory] = useState(() => {
+    const savedHistory = localStorage.getItem("history");
+    if (savedHistory) {
+      return JSON.parse(savedHistory);
+    } else {
+      const newHistory = initStartupHistory(companyData.employee, stats.income, stats.expenses);
+      localStorage.setItem("history", JSON.stringify(newHistory));
+      return newHistory;
+    }
   });
 
-  useEffect(() => {
-    const newHistory = initStartupHistory(
-      companyData.employee,
-      stats.income,
-      stats.expenses,
-    );
+  const [increaseData, setIncreaseData] = useState(() => applyHistory(history));
+
+  const handleSavedData = (newData) => {
+    submitData(newData);
+    localStorage.setItem("financialData", JSON.stringify(newData));
+
+    const newStats = calculateStats(newData);
+    
+    const newHistory = initStartupHistory(newData.employee, newStats.income, newStats.expenses);
+    
+    setHistory(newHistory);
     localStorage.setItem("history", JSON.stringify(newHistory));
-    const increaseData = applyHistory(newHistory);
-    setIncreaseData(increaseData);
-  }, [companyData, stats.income, stats.expenses]);
+    
+    setIncreaseData(applyHistory(newHistory));
+  };
 
   return (
     <main className="main">
