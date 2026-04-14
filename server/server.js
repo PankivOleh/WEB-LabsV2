@@ -14,10 +14,15 @@ mongoose.connect(MONGO_URI)
     .catch(err => console.error('Помилка підключення до БД:', err));
 // 3. СТВОРЕННЯ МОДЕЛІ БАЗИ ДАНИХ (до того, як її викличуть маршрути)
 const companySchema = new mongoose.Schema({
+    userEmail: { type: String, required: true },
     name: { type: String, required: true },
     industry: String,
     employees: Number,
-    revenue: Number
+    revenue: Number,     
+    expenses: Number,   
+    profit: Number,     
+    region: String,      
+    offices: String     
 });
 const Company = mongoose.model('Company', companySchema);
 
@@ -42,25 +47,30 @@ app.get('/api/company', async (req, res) => {
 });
 
 app.post('/api/company', async (req, res) => {
-    const { name, industry, employees, revenue } = req.body;
 
+    const { userEmail, name, industry, employees, revenue, expenses, profit, region, offices } = req.body;
+
+    if (!userEmail) return res.status(400).json({ error: "Необхідно авторизуватися!" });
     if (!name || name.trim().length < 5) {
-        return res.status(400).json({ 
-            error: "Помилка валідації: Ім'я компанії має містити мінімум 5 символів!" 
-        });
+        return res.status(400).json({ error: "Ім'я компанії має містити мінімум 5 символів!" });
     }
 
     try {
-        let company = await Company.findOne();
+        let company = await Company.findOne({ userEmail: userEmail });
 
         if (company) {
             company.name = name;
             company.industry = industry;
             company.employees = employees;
             company.revenue = revenue;
+            company.expenses = expenses;
+            company.profit = profit;
+            company.region = region;
+            company.offices = offices;
             await company.save();
         } else {
-            company = new Company({ name, industry, employees, revenue });
+
+            company = new Company({ userEmail, name, industry, employees, revenue, expenses, profit, region, offices });
             await company.save();
         }
 

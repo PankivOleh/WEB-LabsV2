@@ -319,12 +319,17 @@ const Home = () => {
         const response = await fetch('http://localhost:5000/api/company', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: newData.name,
-              industry: newData.industry,
-              employees: newData.employee,
-              revenue: newStats.income // Передаємо вирахуваний дохід
-            })
+           body: JSON.stringify({
+                userEmail: currentUserEmail, 
+                name: newData.name,
+                industry: newData.industry,
+                employees: newData.employee,
+                revenue: newStats.income,
+                expenses: newStats.expenses, 
+                profit: newStats.profit,    
+                region: newData.region,    
+                offices: newData.offices     
+})
         });
 
         const result = await response.json();
