@@ -280,20 +280,66 @@ const Home = () => {
 
   const [increaseData, setIncreaseData] = useState(() => applyHistory(history));
 
-  const handleSavedData = (newData) => {
+  // 1. ПРАВИЛЬНИЙ GET-ЗАПИТ
+  useEffect(() => {
+    fetch('http://localhost:5000/api/company')
+        .then(res => res.json())
+        .then(data => {
+            if (!data.message && data.name) {
+                // Використовуємо submitData, бо так ти назвав функцію у useState
+                const serverData = {
+                  name: data.name,
+                  industry: data.industry || companyData.industry,
+                  employee: data.employees || companyData.employee,
+                  region: companyData.region, 
+                  offices: companyData.offices 
+                };
+                submitData(serverData);
+                localStorage.setItem("financialData", JSON.stringify(serverData));
+            }
+        })
+        .catch(err => console.error("Помилка підключення до сервера:", err));
+  }, []);
+
+  // 2. ОБ'ЄДНАНА ФУНКЦІЯ ЗБЕРЕЖЕННЯ (Локально + на Сервер)
+  const handleSavedData = async (newData) => {
+    // Спочатку зберігаємо локально
     submitData(newData);
     localStorage.setItem("financialData", JSON.stringify(newData));
 
     const newStats = calculateStats(newData);
-    
     const newHistory = initStartupHistory(newData.employee, newStats.income, newStats.expenses);
     
     setHistory(newHistory);
     localStorage.setItem("history", JSON.stringify(newHistory));
-    
     setIncreaseData(applyHistory(newHistory));
-  };
 
+    // А ТЕПЕР ВІДПРАВЛЯЄМО В MONGODB
+    try {
+        const response = await fetch('http://localhost:5000/api/company', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: newData.name,
+              industry: newData.industry,
+              employees: newData.employee,
+              revenue: newStats.income // Передаємо вирахуваний дохід
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            // Якщо ім'я коротше 5 символів - показуємо помилку
+            alert(result.error); 
+            return;
+        }
+
+        console.log("Успішно збережено на сервері!");
+    } catch (error) {
+        console.error("Помилка сервера:", error);
+    }
+  };
   return (
     <main className="main">
       <div className="main__container">
