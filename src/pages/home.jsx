@@ -2,6 +2,7 @@ import ShowChart from "../components/show-chart";
 import ModalSettings from "../components/modal-setting";
 import ShowTablet from "../components/show-tablet";
 import { useEffect, useState , useRef } from "react";
+import { auth } from "../firebase";
 
 const calculateStats = (data) => {
   const marketRegions = [
@@ -281,29 +282,33 @@ const Home = () => {
   const [increaseData, setIncreaseData] = useState(() => applyHistory(history));
 
   // 1. ПРАВИЛЬНИЙ GET-ЗАПИТ
-  useEffect(() => {
-    fetch('http://localhost:5000/api/company')
-        .then(res => res.json())
-        .then(data => {
-            if (!data.message && data.name) {
-                // Використовуємо submitData, бо так ти назвав функцію у useState
-                const serverData = {
-                  name: data.name,
-                  industry: data.industry || companyData.industry,
-                  employee: data.employees || companyData.employee,
-                  region: companyData.region, 
-                  offices: companyData.offices 
-                };
-                submitData(serverData);
-                localStorage.setItem("financialData", JSON.stringify(serverData));
-            }
-        })
-        .catch(err => console.error("Помилка підключення до сервера:", err));
+useEffect(() => {
+    // Дістаємо поточного юзера з Firebase
+    const user = auth.currentUser;
+    
+    // Якщо юзер є і в нього є email - робимо запит до бази
+    if (user && user.email) {
+        fetch(`/api/company/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.message && data.name) {
+                    const serverData = {
+                      name: data.name,
+                      industry: data.industry || companyData.industry,
+                      employee: data.employees || companyData.employee,
+                      region: data.region || companyData.region, 
+                      offices: data.offices || companyData.offices 
+                    };
+                    submitData(serverData);
+                    localStorage.setItem("financialData", JSON.stringify(serverData));
+                }
+            })
+            .catch(err => console.error("Помилка підключення до сервера:", err));
+    }
   }, []);
 
-  // 2. ОБ'ЄДНАНА ФУНКЦІЯ ЗБЕРЕЖЕННЯ (Локально + на Сервер)
-  const handleSavedData = async (newData) => {
-    // Спочатку зберігаємо локально
+
+const handleSavedData = async (newData) => {
     submitData(newData);
     localStorage.setItem("financialData", JSON.stringify(newData));
 
@@ -314,13 +319,19 @@ const Home = () => {
     localStorage.setItem("history", JSON.stringify(newHistory));
     setIncreaseData(applyHistory(newHistory));
 
-    // А ТЕПЕР ВІДПРАВЛЯЄМО В MONGODB
+    // Перевіряємо, чи є залогінений юзер перед відправкою
+    const user = auth.currentUser;
+    if (!user) {
+        alert("Помилка: Ви не авторизовані!");
+        return;
+    }
+
     try {
-        const response = await fetch('http://localhost:5000/api/company', {
+        const response = await fetch('/api/company', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify({
-                userEmail: currentUserEmail, 
+            body: JSON.stringify({
+                userEmail: user.email, 
                 name: newData.name,
                 industry: newData.industry,
                 employees: newData.employee,
@@ -329,18 +340,17 @@ const Home = () => {
                 profit: newStats.profit,    
                 region: newData.region,    
                 offices: newData.offices     
-})
+            })
         });
 
         const result = await response.json();
 
         if (!response.ok) {
-            // Якщо ім'я коротше 5 символів - показуємо помилку
             alert(result.error); 
             return;
         }
 
-        console.log("Успішно збережено на сервері!");
+        console.log(`Успішно збережено в MongoDB для юзера: ${user.email}`);
     } catch (error) {
         console.error("Помилка сервера:", error);
     }
