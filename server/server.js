@@ -1,18 +1,18 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const mongoose = require('mongoose'); // 1. Всі імпорти зверху
+const mongoose = require('mongoose'); 
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// 2. ПІДКЛЮЧЕННЯ ДО БАЗИ ДАНИХ
+// ПІДКЛЮЧЕННЯ ДО БАЗИ ДАНИХ
 const MONGO_URI = "mongodb+srv://OwnerPankivOleg:ujHzsykQGTVKQ6cQ@clusterforlabs.olyrjxo.mongodb.net/startupDB?appName=ClusterForLabs";
 
 mongoose.connect(MONGO_URI)
     .then(() => console.log('Успішно підключено до MongoDB'))
     .catch(err => console.error('Помилка підключення до БД:', err));
-// 3. СТВОРЕННЯ МОДЕЛІ БАЗИ ДАНИХ (до того, як її викличуть маршрути)
+//  СТВОРЕННЯ МОДЕЛІ БАЗИ ДАНИХ (до того, як її викличуть маршрути)
 const companySchema = new mongoose.Schema({
     userEmail: { type: String, required: true },
     name: { type: String, required: true },
@@ -26,14 +26,14 @@ const companySchema = new mongoose.Schema({
 });
 const Company = mongoose.model('Company', companySchema);
 
-// 4. НАЛАШТУВАННЯ EXPRESS
+//  НАЛАШТУВАННЯ EXPRESS
 app.use(cors());
 app.use(express.json());
 
 // Використовуємо папку dist (для Vite)
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// 5. МАРШРУТИ АРІ
+//  МАРШРУТИ АРІ
 
 app.get('/api/company/:email', async (req, res) => {
     try {
@@ -55,7 +55,7 @@ app.post('/api/company', async (req, res) => {
 
     if (!userEmail) return res.status(400).json({ error: "Необхідно авторизуватися!" });
     if (!name || name.trim().length < 5) {
-        return res.status(400).json({ error: "Ім'я компанії має містити мінімум 5 символів!" });
+        return res.status(400).json({ error: "Ім'я компанії має містити мінімум 5 символів! Дані не були збережені!" });
     }
 
     try {
@@ -83,12 +83,12 @@ app.post('/api/company', async (req, res) => {
     }
 });
 
-// 6. ХОСТИНГ REACT (Всюди використовуємо 'dist')
+// ХОСТИНГ REACT
 app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
-// 7. ЗАПУСК СЕРВЕРА
+// ЗАПУСК СЕРВЕРА
 app.listen(PORT, () => {
     console.log(`Сервер запущено на порту ${PORT}`);
 });

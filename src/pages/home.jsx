@@ -281,7 +281,6 @@ const Home = () => {
 
   const [increaseData, setIncreaseData] = useState(() => applyHistory(history));
 
-  // 1. ПРАВИЛЬНИЙ GET-ЗАПИТ
 useEffect(() => {
     // Дістаємо поточного юзера з Firebase
     const user = auth.currentUser;
