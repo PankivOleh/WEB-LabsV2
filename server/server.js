@@ -26,7 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 // Використовуємо папку dist (для Vite)
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // 5. МАРШРУТИ АРІ
 app.get('/api/company', async (req, res) => {
@@ -72,7 +72,7 @@ app.post('/api/company', async (req, res) => {
 
 // 6. ХОСТИНГ REACT (Всюди використовуємо 'dist')
 app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 // 7. ЗАПУСК СЕРВЕРА
