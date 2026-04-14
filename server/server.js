@@ -34,9 +34,12 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // 5. МАРШРУТИ АРІ
-app.get('/api/company', async (req, res) => {
+
+app.get('/api/company/:email', async (req, res) => {
     try {
-        const company = await Company.findOne();
+        const userEmail = req.params.email; 
+        const company = await Company.findOne({ userEmail: userEmail }); 
+        
         if (!company) {
             return res.status(404).json({ message: "Компанію ще не створено" });
         }
